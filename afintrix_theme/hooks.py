@@ -31,14 +31,16 @@ app_include_css = [
     "/assets/afintrix_theme/css/ki_responsive.css",
     "/assets/afintrix_theme/css/afintrix_theme.css",
     "/assets/afintrix_theme/css/afintrix_brand.css",
-    "/assets/afintrix_theme/css/afintrix_sidebar.css"
+    "/assets/afintrix_theme/css/afintrix_sidebar.css",
+    "/assets/afintrix_theme/css/afintrix_topbar.css"
 ]
 app_include_js = [
     "/assets/afintrix_theme/vendor/simplebar/simplebar.js",
     "/assets/afintrix_theme/vendor/animated_icon/iconify-icon.min.js",
     "/assets/afintrix_theme/js/afintrix_brand.js",
     "/assets/afintrix_theme/js/afintrix_theme.js",
-    "/assets/afintrix_theme/js/afintrix_sidebar.js"
+    "/assets/afintrix_theme/js/afintrix_sidebar.js",
+    "/assets/afintrix_theme/js/afintrix_topbar.js"
 ]
 
 # include js, css files in header of web template (portal/customer pages)

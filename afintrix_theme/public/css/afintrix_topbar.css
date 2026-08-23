@@ -1,0 +1,199 @@
+/* ==========================================================================
+   Afintrix desk top bar — Phase 1
+   Search, quick links, notifications and user menu, lifted out of Frappe's
+   sidebar into the page head to match the reference kit.
+   ========================================================================== */
+
+.afx-topbar {
+	position: sticky;
+	top: 0;
+	z-index: 1010;
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	height: 68px;
+	padding: 0 24px;
+	background: var(--afx-bg, #fff);
+	border-bottom: 1px solid var(--afx-border, #ebedf3);
+}
+
+/* the page head keeps breadcrumbs and page actions on the row below */
+body.afx-topbar-on .page-head {
+	top: 68px;
+}
+
+.afx-topbar-spacer {
+	flex: 1 1 auto;
+}
+
+/* -------------------------------------------------------------- search -- */
+
+.afx-topbar-search {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	height: 44px;
+	min-width: 240px;
+	max-width: 360px;
+	padding: 0 14px;
+	border: 1px solid var(--afx-border, #ebedf3);
+	border-radius: 999px;
+	background: var(--afx-hover, #f5f7fa);
+	color: var(--afx-muted, #8d96a8);
+	font-size: 14px;
+	cursor: pointer;
+	transition: border-color 0.12s ease, background 0.12s ease;
+}
+
+.afx-topbar-search:hover {
+	background: var(--afx-bg, #fff);
+	border-color: var(--afx-primary-200);
+}
+
+.afx-topbar-search-icon {
+	display: flex;
+	font-size: 18px;
+}
+
+.afx-topbar-search-label {
+	flex: 1 1 auto;
+	text-align: left;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.afx-topbar .afx-kbd {
+	font-size: 11px;
+	color: var(--afx-muted, #8d96a8);
+	letter-spacing: 0.3px;
+}
+
+/* --------------------------------------------------------- quick links -- */
+
+.afx-topbar-links {
+	display: flex;
+	align-items: center;
+	gap: 4px;
+}
+
+.afx-topbar-link {
+	padding: 8px 14px;
+	border-radius: 999px;
+	color: var(--afx-label, #48505f);
+	font-size: 14px;
+	font-weight: 500;
+	text-decoration: none !important;
+	white-space: nowrap;
+}
+
+.afx-topbar-link:hover {
+	background: var(--afx-hover, #f5f7fa);
+	color: var(--afx-label-strong, #10141c);
+}
+
+.afx-topbar-link.afx-active {
+	background: var(--afx-primary-050);
+	color: var(--afx-primary);
+}
+
+/* ------------------------------------------------------- icons & user -- */
+
+.afx-topbar-icon-btn {
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 40px;
+	height: 40px;
+	border: none;
+	border-radius: 12px;
+	background: transparent;
+	color: var(--afx-label, #48505f);
+	font-size: 20px;
+	cursor: pointer;
+}
+
+.afx-topbar-icon-btn:hover {
+	background: var(--afx-hover, #f5f7fa);
+	color: var(--afx-label-strong, #10141c);
+}
+
+.afx-topbar-dot {
+	position: absolute;
+	top: 5px;
+	right: 4px;
+	min-width: 17px;
+	height: 17px;
+	padding: 0 4px;
+	border-radius: 999px;
+	background: var(--afx-danger, #e5484d);
+	color: #fff;
+	font-size: 10px;
+	font-weight: 600;
+	line-height: 17px;
+	text-align: center;
+}
+
+.afx-topbar-dot.hidden {
+	display: none;
+}
+
+.afx-topbar-user {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	height: 40px;
+	padding: 0 8px 0 4px;
+	border: none;
+	border-radius: 999px;
+	background: transparent;
+	color: var(--afx-muted, #8d96a8);
+	cursor: pointer;
+}
+
+.afx-topbar-user:hover {
+	background: var(--afx-hover, #f5f7fa);
+}
+
+.afx-topbar-avatar {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 32px;
+	height: 32px;
+	border-radius: 50%;
+	overflow: hidden;
+	background: var(--afx-primary-050);
+	color: var(--afx-primary);
+	font-size: 12px;
+	font-weight: 700;
+}
+
+.afx-topbar-avatar img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+/* -------------------------------------------------------------- narrow -- */
+
+@media (max-width: 1200px) {
+	.afx-topbar-links {
+		display: none;
+	}
+}
+
+@media (max-width: 860px) {
+	.afx-topbar-search {
+		min-width: 44px;
+		max-width: 44px;
+		padding: 0;
+		justify-content: center;
+	}
+
+	.afx-topbar-search-label,
+	.afx-topbar .afx-kbd {
+		display: none;
+	}
+}
