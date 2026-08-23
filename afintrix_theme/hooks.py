@@ -30,11 +30,13 @@ app_include_css = [
     "/assets/afintrix_theme/css/ki_style.css",
     "/assets/afintrix_theme/css/ki_responsive.css",
     "/assets/afintrix_theme/css/afintrix_theme.css",
+    "/assets/afintrix_theme/css/afintrix_brand.css",
     "/assets/afintrix_theme/css/afintrix_sidebar.css"
 ]
 app_include_js = [
     "/assets/afintrix_theme/vendor/simplebar/simplebar.js",
     "/assets/afintrix_theme/vendor/animated_icon/iconify-icon.min.js",
+    "/assets/afintrix_theme/js/afintrix_brand.js",
     "/assets/afintrix_theme/js/afintrix_theme.js",
     "/assets/afintrix_theme/js/afintrix_sidebar.js"
 ]

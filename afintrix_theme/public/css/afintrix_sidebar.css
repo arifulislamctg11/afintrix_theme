@@ -5,11 +5,6 @@
    ========================================================================== */
 
 :root {
-	--afx-primary: #1e40c8;
-	--afx-primary-hover: #172fa0;
-	--afx-primary-soft: #eef1fd;
-	--afx-gold: #c8992e;
-
 	--afx-sidebar-w: 288px;
 	--afx-sidebar-w-collapsed: 84px;
 
@@ -26,10 +21,6 @@
 }
 
 [data-theme="dark"] {
-	--afx-primary: #3f5ce0;
-	--afx-primary-hover: #4b68ea;
-	--afx-primary-soft: #1c2340;
-
 	--afx-bg: #16181d;
 	--afx-border: #262a33;
 	--afx-label: #b9c1cf;
@@ -120,7 +111,7 @@ body.afx-sidebar-on.afx-collapsed .body-sidebar-container .dropdown-notification
 	height: 34px;
 	flex: 0 0 34px;
 	border-radius: 10px;
-	background: var(--afx-primary-soft);
+	background: var(--afx-primary-050);
 	overflow: hidden;
 }
 
@@ -187,12 +178,12 @@ body.afx-sidebar-on.afx-collapsed .body-sidebar-container .dropdown-notification
 	font-size: 15px;
 	font-weight: 600;
 	text-decoration: none !important;
-	box-shadow: 0 8px 18px -10px rgba(30, 64, 200, 0.85);
+	box-shadow: 0 8px 18px -10px var(--afx-primary-ring);
 	transition: background 0.15s ease;
 }
 
 .afx-primary:hover {
-	background: var(--afx-primary-hover);
+	background: var(--afx-primary-deep);
 }
 
 .afx-primary-icon {
@@ -427,7 +418,7 @@ body.afx-sidebar-on.afx-collapsed .body-sidebar-container .dropdown-notification
 	height: 32px;
 	flex: 0 0 32px;
 	border-radius: 50%;
-	background: var(--afx-primary-soft);
+	background: var(--afx-primary-050);
 	color: var(--afx-primary);
 	font-size: 12px;
 	font-weight: 700;

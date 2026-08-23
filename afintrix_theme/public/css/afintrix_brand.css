@@ -1,0 +1,164 @@
+/* ==========================================================================
+   Afintrix brand layer — Phase 1
+   Maps the Afintrix brand tokens onto Frappe v16's espresso design tokens.
+   Loaded after Frappe's own CSS so these definitions win.
+
+   Token values are overridable per site: afintrix_brand.js writes the values
+   from Theme Settings onto :root at boot, so a re-brand needs no code change.
+   ========================================================================== */
+
+/* ------------------------------------------------------------- webfont -- */
+
+@font-face {
+	font-family: "Montserrat";
+	font-style: normal;
+	font-weight: 100 900;
+	font-display: swap;
+	src: url("/assets/afintrix_theme/fonts/montserrat-latin.woff2") format("woff2");
+	unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
+		U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215,
+		U+FEFF, U+FFFD;
+}
+
+@font-face {
+	font-family: "Montserrat";
+	font-style: normal;
+	font-weight: 100 900;
+	font-display: swap;
+	src: url("/assets/afintrix_theme/fonts/montserrat-latin-ext.woff2") format("woff2");
+	unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304,
+		U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0,
+		U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+/* -------------------------------------------------------------- tokens -- */
+
+:root,
+[data-theme="light"],
+[data-theme="dark"] {
+	/* Afintrix brand — see Brand details/presentation-01.jpg */
+	--afx-primary: #1e39d6;
+	--afx-primary-deep: #121ca4;
+	--afx-gold: #b77f27;
+	--afx-gold-light: #d5aa55;
+
+	/* tints derived from the primary, used for soft fills and focus rings */
+	--afx-primary-050: #eef1fd;
+	--afx-primary-100: #dbe1fb;
+	--afx-primary-200: #b7c2f6;
+	--afx-primary-600: #1a33bd;
+	--afx-primary-ring: rgba(30, 57, 214, 0.25);
+
+	--afx-gold-050: #fbf5e9;
+	--afx-gold-100: #f3e6c9;
+
+	/* typography */
+	--font-stack: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+		"Helvetica Neue", sans-serif;
+
+	/* Frappe tokens the brand owns */
+	--primary: var(--afx-primary);
+	--primary-color: var(--afx-primary);
+	--brand-color: var(--afx-primary);
+	--btn-primary: var(--afx-primary);
+	--checkbox-gradient: linear-gradient(180deg, var(--afx-primary) -124.51%, var(--afx-primary) 100%);
+}
+
+[data-theme="dark"] {
+	/* the flat brand blue is too heavy on a dark ground; lift it a step */
+	--afx-primary: #4560e6;
+	--afx-primary-deep: #2f47cf;
+	--afx-primary-050: #1b2140;
+	--afx-primary-100: #232c56;
+	--afx-primary-200: #2f3b74;
+	--afx-primary-ring: rgba(69, 96, 230, 0.35);
+
+	--afx-gold: #d5aa55;
+	--afx-gold-light: #e6c98c;
+	--afx-gold-050: #2a2418;
+	--afx-gold-100: #3a3120;
+}
+
+/* --------------------------------------------------------- typography -- */
+
+body,
+.btn,
+input,
+select,
+textarea,
+button {
+	font-family: var(--font-stack);
+}
+
+/* Montserrat runs wider and taller than Inter at the same size; pull the
+   heaviest desk weights back so dense screens keep their rhythm. */
+h1, h2, h3, h4, h5, h6,
+.page-title,
+.title-text,
+.section-head {
+	font-weight: 600;
+	letter-spacing: -0.01em;
+}
+
+/* ------------------------------------------------------------- buttons -- */
+
+.btn.btn-primary {
+	background-color: var(--afx-primary);
+	border-color: var(--afx-primary);
+	color: #fff;
+}
+
+.btn.btn-primary:hover,
+.btn.btn-primary:focus {
+	background-color: var(--afx-primary-deep) !important;
+	border-color: var(--afx-primary-deep) !important;
+	color: #fff !important;
+}
+
+.btn.btn-primary:active {
+	background-color: var(--afx-primary-deep) !important;
+	color: #fff !important;
+}
+
+.btn:focus-visible,
+.btn.btn-primary:focus-visible {
+	outline: none;
+	box-shadow: 0 0 0 3px var(--afx-primary-ring);
+}
+
+/* ------------------------------------------------- links and controls -- */
+
+a,
+.link-btn,
+.text-primary {
+	color: var(--afx-primary);
+}
+
+a:hover {
+	color: var(--afx-primary-deep);
+}
+
+.form-control:focus,
+.input-with-feedback:focus,
+.awesomplete > input:focus,
+textarea.form-control:focus,
+select.form-control:focus {
+	border-color: var(--afx-primary);
+	box-shadow: 0 0 0 3px var(--afx-primary-ring);
+}
+
+input[type="checkbox"]:checked,
+.checkbox input:checked {
+	background-color: var(--afx-primary);
+	border-color: var(--afx-primary);
+}
+
+/* accent: gold is reserved for highlights, never for primary actions */
+.afx-accent {
+	color: var(--afx-gold);
+}
+
+.afx-accent-bg {
+	background-color: var(--afx-gold-050);
+	color: var(--afx-gold);
+}
