@@ -12,11 +12,13 @@ ICON_MAP = [
     (["manuf", "work", "build"], "cog"),
     (["qual", "check"], "check-all"),
     (["proj", "task"], "document-list"),
+    (["supply", "logistic"], "clipboard"),
     (["supp", "help", "ticket"], "chat-bubble"),
     (["user", "hr", "employee", "payroll", "people"], "person"),
     (["web", "portal"], "laptop"),
     (["set", "setup", "tool", "config"], "cog"),
     (["integ", "api"], "grid-3"),
+    (["admin", "govern"], "cog"),
 ]
 
 
@@ -350,13 +352,24 @@ def _pop_primary_action(menu, label=None):
 
 
 def _user_initials(full_name, email):
-    source = (full_name or email or "").strip()
-    parts = [p for p in source.replace(".", " ").replace("@", " ").split(" ") if p]
-    if not parts:
-        return "?"
-    if len(parts) == 1:
-        return parts[0][:2].upper()
-    return (parts[0][0] + parts[-1][0]).upper()
+    """Two letters for the avatar: initials from a name, or the local part of an email.
+
+    Splitting an address on every separator gives "JC" for jane@example.com, which
+    reads as a different person, so only real names contribute two initials.
+    """
+    name = (full_name or "").strip()
+    if name:
+        parts = [p for p in name.replace(".", " ").split(" ") if p]
+        if len(parts) == 1:
+            return parts[0][:2].upper()
+        if parts:
+            return (parts[0][0] + parts[-1][0]).upper()
+
+    local = (email or "").split("@")[0].strip()
+    if local:
+        return local[:2].upper()
+
+    return "?"
 
 
 def get_sidebar_context():

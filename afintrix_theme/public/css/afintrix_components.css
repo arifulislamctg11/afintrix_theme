@@ -273,3 +273,42 @@ textarea.form-control,
 [data-theme="dark"] .msg-box {
 	background: #1a1d23;
 }
+
+/* The inherited template paints controls #ffffff !important, which leaves white
+   fields on the dark ground. Answer in kind rather than editing 40k lines of it. */
+[data-theme="dark"] .form-control:not([type="checkbox"]):not([type="radio"]),
+[data-theme="dark"] select.form-control,
+[data-theme="dark"] textarea.form-control,
+[data-theme="dark"] .input-with-feedback,
+[data-theme="dark"] .awesomplete > input,
+[data-theme="dark"] .frappe-control input[type="text"],
+[data-theme="dark"] .frappe-control input[type="number"],
+[data-theme="dark"] .frappe-control input[type="email"],
+[data-theme="dark"] .frappe-control input[type="password"],
+[data-theme="dark"] .frappe-control input[type="date"] {
+	background-color: #1f2229 !important;
+	border-color: var(--afx-control-border) !important;
+	color: #e6e9ef !important;
+}
+
+[data-theme="dark"] .form-control::placeholder {
+	color: #7b8494 !important;
+}
+
+[data-theme="dark"] .modal .modal-content,
+[data-theme="dark"] .modal .modal-header {
+	background-color: #16181d;
+}
+
+[data-theme="dark"] .grid-static-col,
+[data-theme="dark"] .grid-heading-row,
+[data-theme="dark"] .list-row-head {
+	background-color: #1a1d23 !important;
+}
+
+[data-theme="dark"] .form-control:not([type="checkbox"]):not([type="radio"]):focus,
+[data-theme="dark"] .form-control:not([type="checkbox"]):not([type="radio"]):hover,
+[data-theme="dark"] .awesomplete > input:focus {
+	background-color: #1f2229 !important;
+	color: #e6e9ef !important;
+}
