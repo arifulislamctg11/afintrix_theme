@@ -15,7 +15,9 @@
 	let building = false;
 
 	function is_desk() {
-		return !!(window.frappe && frappe.boot && document.querySelector(".page-head"));
+		// .page-head is not present on every desk route and appears late on a
+		// cold load; the content column is the only thing the bar needs.
+		return !!(window.frappe && frappe.boot && document.querySelector(".main-section"));
 	}
 
 	function settings() {
@@ -178,7 +180,22 @@
 		return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
 	}
 
-	$(document).ready(build);
+	// The desk renders its shell asynchronously, so a single pass at ready time
+	// can run before .main-section exists. Watch until the bar is in place.
+	function watch_for_shell() {
+		if (document.querySelector(".afx-topbar")) return;
+		const observer = new MutationObserver(() => {
+			build();
+			if (document.querySelector(".afx-topbar")) observer.disconnect();
+		});
+		observer.observe(document.body, { childList: true, subtree: true });
+		setTimeout(() => observer.disconnect(), 15000);
+	}
+
+	$(document).ready(function () {
+		build();
+		watch_for_shell();
+	});
 	$(document).on("app_ready page-change", build);
 
 	window.afintrix_topbar = { build: build };

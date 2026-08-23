@@ -1,0 +1,275 @@
+/* ==========================================================================
+   Afintrix desk components — Phase 1
+   Buttons, form controls, dialogs, list view, cards and states, restyled to
+   the reference kit's shapes on top of the brand tokens.
+
+   Sizing note: the kit draws 56px controls for a six-field HR form. ERPNext
+   forms carry far more fields per screen, so heights land between the kit and
+   Frappe's stock density — the kit's radii, borders and spacing rhythm are
+   kept, its scale is not copied literally.
+   ========================================================================== */
+
+:root {
+	--afx-radius-sm: 8px;
+	--afx-radius-md: 10px;
+	--afx-radius-lg: 14px;
+	--afx-radius-xl: 16px;
+	--afx-control-h: 36px;
+	--afx-control-border: var(--afx-border, #ebedf3);
+}
+
+/* ------------------------------------------------------------- buttons -- */
+
+.btn {
+	border-radius: var(--afx-radius-md);
+	font-weight: 500;
+	transition: background-color 0.12s ease, border-color 0.12s ease, color 0.12s ease;
+}
+
+.btn-sm,
+.btn-default,
+.btn-secondary {
+	border-radius: var(--afx-radius-md);
+}
+
+.btn-default,
+.btn-secondary {
+	border: 1px solid var(--afx-control-border);
+	background: var(--afx-bg, #fff);
+}
+
+.btn-default:hover,
+.btn-secondary:hover {
+	background: var(--afx-hover, #f5f7fa);
+	border-color: var(--afx-primary-200);
+}
+
+.page-actions .btn-primary,
+.modal-footer .btn-primary {
+	padding-inline: 16px;
+}
+
+/* ------------------------------------------------------- form controls -- */
+
+.form-control,
+select.form-control,
+textarea.form-control,
+.input-with-feedback,
+.awesomplete > input,
+.frappe-control input[type="text"],
+.frappe-control input[type="number"],
+.frappe-control input[type="email"],
+.frappe-control input[type="password"],
+.frappe-control input[type="date"] {
+	min-height: var(--afx-control-h);
+	border-radius: var(--afx-radius-md);
+	border: 1px solid var(--afx-control-border);
+	background: var(--afx-bg, #fff);
+	transition: border-color 0.12s ease, box-shadow 0.12s ease;
+}
+
+.form-control::placeholder {
+	color: var(--afx-muted, #8d96a8);
+}
+
+.frappe-control .control-label {
+	font-weight: 500;
+	color: var(--afx-label, #48505f);
+	letter-spacing: 0;
+}
+
+/* the kit marks required fields with a red asterisk rather than a coloured label */
+.frappe-control.has-error .control-label,
+.frappe-control [data-reqd="1"] ~ .control-label {
+	color: var(--afx-label, #48505f);
+}
+
+.frappe-control .reqd > .control-label::after,
+.frappe-control .control-label.reqd::after {
+	content: " *";
+	color: var(--afx-danger, #e5484d);
+	font-weight: 600;
+}
+
+.form-section .section-head,
+.form-tabs .nav-link {
+	font-weight: 600;
+	letter-spacing: -0.01em;
+}
+
+/* select and date affordances keep Frappe's own icons but line up with the radius */
+.control-input .select-icon,
+.control-input .btn-open-now {
+	color: var(--afx-muted, #8d96a8);
+}
+
+/* ------------------------------------------------------------- dialogs -- */
+
+.modal .modal-content {
+	border: 1px solid var(--afx-control-border);
+	border-radius: var(--afx-radius-xl);
+	box-shadow: 0 24px 60px -24px rgba(12, 16, 24, 0.35);
+	overflow: hidden;
+}
+
+.modal .modal-header {
+	padding: 20px 24px 12px;
+	border-bottom: 1px solid var(--afx-control-border);
+}
+
+.modal .modal-title {
+	font-size: 18px;
+	font-weight: 600;
+	letter-spacing: -0.01em;
+}
+
+.modal .modal-body {
+	padding: 20px 24px;
+}
+
+.modal .modal-footer {
+	gap: 8px;
+	padding: 14px 24px;
+	border-top: 1px solid var(--afx-control-border);
+	background: var(--afx-hover, #f8fafc);
+}
+
+/* --------------------------------------------------------- list view -- */
+
+.list-row-head,
+.list-row-head.text-muted {
+	background: var(--afx-hover, #f5f7fa);
+	border-bottom: 1px solid var(--afx-control-border);
+	font-weight: 600;
+	color: var(--afx-label, #48505f);
+}
+
+.frappe-list .result {
+	border-radius: var(--afx-radius-lg);
+	overflow: hidden;
+	border: 1px solid var(--afx-control-border);
+	background: var(--afx-bg, #fff);
+}
+
+.list-row-container {
+	border-bottom: 1px solid var(--afx-control-border);
+}
+
+.list-row-container:last-child {
+	border-bottom: none;
+}
+
+.list-row:hover {
+	background: var(--afx-hover, #f8fafc);
+}
+
+.list-subject .level-item .ellipsis {
+	font-weight: 600;
+}
+
+/* status chips stay semantic — see SPEC section 4 */
+.indicator-pill,
+.indicator-pill.whitespace-nowrap {
+	border-radius: 999px;
+	padding: 3px 10px;
+	font-weight: 600;
+	font-size: 11px;
+	letter-spacing: 0.02em;
+	text-transform: uppercase;
+}
+
+.list-paging-area .btn,
+.list-count {
+	border-radius: var(--afx-radius-md);
+}
+
+/* standard filter row reads as a strip of pills, as in the kit */
+.standard-filter-section .form-control,
+.filter-selector .btn,
+.sort-selector .btn {
+	border-radius: var(--afx-radius-md);
+	background: var(--afx-bg, #fff);
+}
+
+/* ----------------------------------------------------- cards & widgets -- */
+
+.widget,
+.widget.shortcut-widget-box,
+.widget.number-widget-box,
+.widget.links-widget-box,
+.widget.onboarding-widget-box,
+.form-dashboard-section,
+.dashboard-section {
+	border-radius: var(--afx-radius-xl);
+	border: 1px solid var(--afx-control-border);
+	box-shadow: none;
+}
+
+.widget:hover {
+	border-color: var(--afx-primary-200);
+}
+
+.widget .widget-head .widget-title {
+	font-weight: 600;
+}
+
+.number-widget-box .widget-content .number {
+	font-weight: 700;
+	letter-spacing: -0.02em;
+}
+
+/* ------------------------------------------------------------- states -- */
+
+.no-result,
+.msg-box {
+	border-radius: var(--afx-radius-xl);
+	background: var(--afx-hover, #f8fafc);
+	border: 1px dashed var(--afx-control-border);
+	color: var(--afx-muted, #8d96a8);
+}
+
+.no-result .btn-primary {
+	margin-top: 12px;
+}
+
+.freeze,
+.page-card-container .loading {
+	backdrop-filter: blur(1px);
+}
+
+/* Frappe's skeletons default to a grey ramp; tint them to the brand so long
+   loads still read as Afintrix rather than generic chrome. */
+.skeleton,
+.skeleton-block,
+.list-skeleton {
+	background: linear-gradient(
+		90deg,
+		var(--afx-hover, #f5f7fa) 25%,
+		var(--afx-primary-050) 50%,
+		var(--afx-hover, #f5f7fa) 75%
+	);
+	background-size: 400% 100%;
+	animation: afx-shimmer 1.4s ease-in-out infinite;
+	border-radius: var(--afx-radius-sm);
+}
+
+@keyframes afx-shimmer {
+	0% {
+		background-position: 100% 0;
+	}
+	100% {
+		background-position: 0 0;
+	}
+}
+
+/* ---------------------------------------------------------------- dark -- */
+
+[data-theme="dark"] {
+	--afx-control-border: #2a2e36;
+}
+
+[data-theme="dark"] .modal .modal-footer,
+[data-theme="dark"] .no-result,
+[data-theme="dark"] .msg-box {
+	background: #1a1d23;
+}

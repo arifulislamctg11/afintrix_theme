@@ -162,3 +162,33 @@ input[type="checkbox"]:checked,
 	background-color: var(--afx-gold-050);
 	color: var(--afx-gold);
 }
+
+/* ------------------------------------------------- inherited dark gaps -- */
+
+/* The template this app was forked from declares its palette on :root only and
+   forces it onto body with !important, so Frappe's dark theme never reached the
+   content column. These give those same variables a dark value. */
+
+[data-theme="dark"] {
+	--bodybg-color: #14161b;
+	--body-color: #14161b;
+	--np-bg: #14161b;
+	--bg-color: #14161b;
+	--surface-color: #1a1d23;
+	--font-color: #e6e9ef;
+	--text-primary: #e6e9ef;
+	--font-light-color: #8d96a8;
+	--text-secondary: #8d96a8;
+	--light-gray: #22262f;
+	--border_color: #2a2e36;
+	--border-color-frappe: #2a2e36;
+	--glass-border: 1px solid rgba(255, 255, 255, 0.06);
+	--box-shadow: 0 0.1rem 0.5rem 0 rgba(0, 0, 0, 0.45);
+}
+
+[data-theme="dark"] .widget,
+[data-theme="dark"] .form-section,
+[data-theme="dark"] .frappe-card,
+[data-theme="dark"] .page-card {
+	background-color: var(--surface-color);
+}
