@@ -1,0 +1,104 @@
+{# Afintrix desk sidebar — rendered by afintrix_theme.events.sidebar.get_sidebar_html
+   and injected into the Frappe v16 desk by public/js/afintrix_sidebar.js #}
+<nav class="afx-sidebar" id="afx-sidebar" aria-label="{{ _('Main navigation') }}">
+
+	<div class="afx-head">
+		<a class="afx-brand" href="/app" title="{{ brand_title }}">
+			<span class="afx-brand-mark">
+				<img src="{{ app_logo }}" alt="{{ brand_title }}">
+			</span>
+			<span class="afx-brand-name">{{ brand_title }}</span>
+		</a>
+		<button type="button" class="afx-collapse-btn" data-afx-collapse
+			title="{{ _('Toggle sidebar') }}" aria-label="{{ _('Toggle sidebar') }}">
+			<span class="afx-chevrons"><span></span><span></span></span>
+		</button>
+	</div>
+
+	{% if primary_action %}
+	<a class="afx-primary" href="{{ primary_action.route }}" data-afx-route="{{ primary_action.route }}"
+		title="{{ primary_action.title }}">
+		<span class="afx-primary-label">{{ primary_action.title }}</span>
+		<span class="afx-primary-icon">
+			<iconify-icon icon="line-md:grid-3"></iconify-icon>
+		</span>
+	</a>
+	{% endif %}
+
+	<div class="afx-quick">
+		<button type="button" class="afx-link afx-quick-item" data-afx-action="search">
+			<span class="afx-icon"><iconify-icon icon="line-md:search"></iconify-icon></span>
+			<span class="afx-label">{{ _('Search') }}</span>
+			<span class="afx-kbd" data-afx-kbd>&#8984;K</span>
+		</button>
+		<button type="button" class="afx-link afx-quick-item" data-afx-action="notifications">
+			<span class="afx-icon"><iconify-icon icon="line-md:bell"></iconify-icon></span>
+			<span class="afx-label">{{ _('Notifications') }}</span>
+			<span class="afx-badge afx-badge-count hidden" data-afx-notification-count>0</span>
+		</button>
+	</div>
+
+	<div class="afx-nav-scroll">
+		<ul class="afx-nav">
+			{% for item in menu %}
+				{% if item.is_group %}
+				<li class="afx-item afx-group" data-afx-group="{{ item.slug }}">
+					<button type="button" class="afx-link afx-group-toggle" aria-expanded="true"
+						data-afx-toggle="afx-grp-{{ loop.index }}">
+						<span class="afx-icon"><iconify-icon icon="line-md:{{ item.icon or 'grid-3' }}"></iconify-icon></span>
+						<span class="afx-label">{{ item.title }}</span>
+						<span class="afx-caret"><iconify-icon icon="line-md:chevron-down"></iconify-icon></span>
+					</button>
+					<ul class="afx-subnav" id="afx-grp-{{ loop.index }}">
+						{% for sub in item.children %}
+						<li class="afx-subitem">
+							<a class="afx-sublink" href="{{ sub.route }}" data-afx-route="{{ sub.route }}"
+								title="{{ sub.title }}">{{ sub.title }}</a>
+						</li>
+						{% endfor %}
+					</ul>
+				</li>
+				{% else %}
+				<li class="afx-item">
+					<a class="afx-link" href="{{ item.route }}" data-afx-route="{{ item.route }}" title="{{ item.title }}">
+						<span class="afx-icon"><iconify-icon icon="line-md:{{ item.icon or 'grid-3' }}"></iconify-icon></span>
+						<span class="afx-label">{{ item.title }}</span>
+					</a>
+				</li>
+				{% endif %}
+			{% endfor %}
+		</ul>
+	</div>
+
+	<div class="afx-foot">
+		<a class="afx-link afx-foot-link" href="{{ help_url }}" target="_blank" rel="noopener"
+			title="{{ _('Help Center') }}">
+			<span class="afx-icon"><iconify-icon icon="line-md:question"></iconify-icon></span>
+			<span class="afx-label">{{ _('Help Center') }}</span>
+		</a>
+		<a class="afx-link afx-foot-link" href="/app/settings" data-afx-route="/app/settings"
+			title="{{ _('Setting') }}">
+			<span class="afx-icon"><iconify-icon icon="line-md:cog"></iconify-icon></span>
+			<span class="afx-label">{{ _('Setting') }}</span>
+		</a>
+
+		<button type="button" class="afx-user" data-afx-action="user-menu" title="{{ user_fullname }}">
+			<span class="afx-avatar">{{ user_abbr }}</span>
+			<span class="afx-user-meta">
+				<span class="afx-user-name">{{ user_fullname }}</span>
+				<span class="afx-user-mail">{{ user_email }}</span>
+			</span>
+		</button>
+
+		<div class="afx-theme-switch" role="group" aria-label="{{ _('Colour theme') }}">
+			<button type="button" class="afx-theme-btn" data-afx-theme="light">
+				<iconify-icon icon="line-md:sun"></iconify-icon>
+				<span>{{ _('Light') }}</span>
+			</button>
+			<button type="button" class="afx-theme-btn" data-afx-theme="dark">
+				<iconify-icon icon="line-md:moon"></iconify-icon>
+				<span>{{ _('Dark') }}</span>
+			</button>
+		</div>
+	</div>
+</nav>

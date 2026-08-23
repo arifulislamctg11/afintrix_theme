@@ -1,0 +1,898 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
+
+/* ==========================================================================
+   NAIDAPA PORTAL THEME — Match the Desk (KI-Admin) Design
+   ==========================================================================
+   Applies to all Frappe web/portal pages (/me, /orders, /addresses, etc.)
+   Uses the same color palette, typography, and design language as the desk.
+   ========================================================================== */
+
+/* -------------------------------------------------------------------------- */
+/* 1. CSS VARIABLES                                                           */
+/* -------------------------------------------------------------------------- */
+:root {
+    --np-primary: #0f626a;
+    --np-primary-hover: #0c4e55;
+    --np-primary-light: rgba(15, 98, 106, 0.08);
+    --np-primary-glow: rgba(15, 98, 106, 0.15);
+    --np-surface: #ffffff;
+    --np-bg: #f5fbfb;
+    --np-bg-alt: #f6f7fa;
+    --np-text: #082f32;
+    --np-text-secondary: #a0a0b0;
+    --np-text-muted: #6c757d;
+    --np-border: #ebedf0;
+    --np-border-hover: #b0b9c4;
+    --np-shadow: 0 0.1rem 0.5rem 0 rgba(40, 35, 45, 0.10);
+    --np-shadow-hover: 0 0.5rem 2rem rgba(244, 247, 248, 1);
+    --np-shadow-card: 0 4px 20px rgba(15, 98, 106, 0.06);
+    --np-radius-lg: 12px;
+    --np-radius-md: 8px;
+    --np-radius-sm: 4px;
+    --np-transition: all 0.3s ease;
+    --np-sidebar-width: 260px;
+    --np-navbar-height: 60px;
+    --np-gradient-green: linear-gradient(135deg, #10b981 0%, #73c76b 60%, #d4dda0 100%);
+    --np-gradient-teal: linear-gradient(135deg, #10b981 0%, #0d6b59 100%);
+}
+
+
+/* -------------------------------------------------------------------------- */
+/* 2. GLOBAL OVERRIDES                                                        */
+/* -------------------------------------------------------------------------- */
+body {
+    font-family: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif !important;
+    background-color: var(--np-bg) !important;
+    color: var(--np-text) !important;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+    color: var(--np-primary);
+    transition: var(--np-transition);
+}
+
+a:hover {
+    color: var(--np-primary-hover);
+    text-decoration: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
+    color: var(--np-text);
+    font-weight: 600;
+}
+
+
+/* -------------------------------------------------------------------------- */
+/* 3. NAVBAR OVERRIDE                                                         */
+/* -------------------------------------------------------------------------- */
+.navbar {
+    background-color: var(--np-surface) !important;
+    border-bottom: 1px solid var(--np-border) !important;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.03) !important;
+    padding: 0 24px !important;
+    min-height: var(--np-navbar-height) !important;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    z-index: 1050 !important;
+    overflow: visible !important;
+}
+
+
+.navbar .navbar-brand {
+    font-weight: 700 !important;
+    color: var(--np-primary) !important;
+    font-size: 18px !important;
+    letter-spacing: -0.3px;
+}
+
+.navbar .navbar-brand img {
+    max-height: 36px !important;
+}
+
+.navbar .nav-link {
+    color: var(--np-text) !important;
+    font-weight: 500 !important;
+    font-size: 14px !important;
+    padding: 8px 16px !important;
+    border-radius: var(--np-radius-sm);
+    transition: var(--np-transition);
+}
+
+.navbar .nav-link:hover {
+    color: var(--np-primary) !important;
+    background-color: var(--np-primary-light) !important;
+}
+
+/* Navbar user avatar / login area */
+.navbar .dropdown-toggle::after {
+    display: none;
+}
+
+.navbar .dropdown-menu {
+    border: 1px solid var(--np-border) !important;
+    border-radius: var(--np-radius-md) !important;
+    box-shadow: var(--np-shadow-card) !important;
+    padding: 8px !important;
+    min-width: 200px;
+    z-index: 9999 !important;
+    margin-top: 8px !important;
+}
+
+
+.navbar .dropdown-menu .dropdown-item {
+    border-radius: var(--np-radius-sm);
+    padding: 8px 12px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--np-text);
+    transition: var(--np-transition);
+}
+
+.navbar .dropdown-menu .dropdown-item:hover {
+    background-color: var(--np-primary-light) !important;
+    color: var(--np-primary) !important;
+}
+
+
+/* -------------------------------------------------------------------------- */
+/* 4. SIDEBAR OVERHAUL                                                        */
+/* -------------------------------------------------------------------------- */
+
+.container, 
+main.container,
+.page-content-wrapper,
+.page_content {
+    max-width: 100% !important;
+    width: 100% !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+.row {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+}
+
+
+
+/* The sidebar column */
+.sidebar-column {
+    background-color: var(--np-surface) !important;
+    border-right: 1px solid var(--np-border) !important;
+    border-radius: 0 !important;
+    padding: 0 !important;
+    min-height: calc(100vh - var(--np-navbar-height)) !important;
+    position: sticky;
+    top: var(--np-navbar-height);
+}
+
+/* The web-sidebar container */
+.web-sidebar {
+    padding: 24px 0 !important;
+}
+
+.web-sidebar .sidebar-items {
+    padding: 0;
+}
+
+/* --- Sidebar Group Title --- */
+.web-sidebar .sidebar-group h6 {
+    font-size: 11px !important;
+    text-transform: uppercase !important;
+    letter-spacing: 1px !important;
+    color: var(--np-text-secondary) !important;
+    font-weight: 700 !important;
+    padding: 0 20px !important;
+    margin-bottom: 8px !important;
+    margin-top: 16px !important;
+}
+
+/* --- Sidebar Items (individual links) --- */
+.web-sidebar .sidebar-item {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.web-sidebar .sidebar-item a {
+    display: flex !important;
+    align-items: center !important;
+    padding: 10px 20px !important;
+    color: var(--np-text) !important;
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    text-decoration: none !important;
+    border-left: 3px solid transparent !important;
+    border-radius: 0 !important;
+    transition: var(--np-transition) !important;
+    white-space: nowrap !important;
+    line-height: 1.5 !important;
+}
+
+.web-sidebar .sidebar-item a:hover {
+    background-color: var(--np-primary-light) !important;
+    color: var(--np-primary) !important;
+    border-left-color: rgba(15, 98, 106, 0.3) !important;
+}
+
+/* Active sidebar link */
+.web-sidebar .sidebar-item a.active {
+    background-color: var(--np-primary) !important;
+    color: #ffffff !important;
+    border-left-color: var(--np-primary) !important;
+    font-weight: 600 !important;
+    border-radius: 5px !important;
+    margin: 2px 12px !important;
+    padding: 10px 14px !important;
+}
+
+/* Title item in sidebar (e.g., section titles) */
+.web-sidebar .title {
+    font-size: 11px !important;
+    text-transform: uppercase !important;
+    letter-spacing: 1px !important;
+    color: var(--np-text-secondary) !important;
+    font-weight: 700 !important;
+    padding: 20px 20px 8px 20px !important;
+}
+
+
+/* -------------------------------------------------------------------------- */
+/* 5. MAIN CONTENT AREA                                                       */
+/* -------------------------------------------------------------------------- */
+
+/* Ensure main content has proper spacing and styling */
+.main-column {
+    padding: 0 40px 32px 40px !important;
+    background: var(--np-bg) !important;
+}
+
+main.my-4 {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+}
+
+
+
+/* Page content wrapper */
+.page-content-wrapper {
+    width: 100% !important;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+}
+
+
+
+
+
+/* -------------------------------------------------------------------------- */
+/* 6. MY ACCOUNT PAGE (/me) SPECIFIC STYLES                                   */
+/* -------------------------------------------------------------------------- */
+
+/* My Account header */
+.my-account-header {
+    font-size: 24px !important;
+    font-weight: 700 !important;
+    color: var(--np-text) !important;
+    margin-bottom: 24px !important;
+    padding-bottom: 16px !important;
+    border-bottom: 2px solid var(--np-border) !important;
+}
+
+/* Account info rows */
+.account-info>.col {
+    background: var(--np-surface) !important;
+    border-radius: var(--np-radius-md) !important;
+    border: 1px solid var(--np-border) !important;
+    padding: 20px 24px !important;
+    margin-bottom: 12px !important;
+    transition: var(--np-transition) !important;
+    box-shadow: var(--np-shadow) !important;
+}
+
+.account-info>.col:hover {
+    border-color: rgba(15, 98, 106, 0.2) !important;
+    box-shadow: var(--np-shadow-card) !important;
+    transform: translateX(4px);
+}
+
+/* The user info row (avatar + name) */
+.account-info .my-account-avatar .avatar {
+    width: 48px !important;
+    height: 48px !important;
+    border-radius: 50% !important;
+    border: 2px solid var(--np-primary-light) !important;
+}
+
+.account-info .my-account-name {
+    font-size: 18px !important;
+    font-weight: 600 !important;
+    color: var(--np-text) !important;
+}
+
+/* Item labels (Reset Password, Manage Apps, etc.) */
+.my-account-item {
+    font-size: 15px !important;
+    font-weight: 600 !important;
+    color: var(--np-text) !important;
+    margin-bottom: 2px !important;
+}
+
+.my-account-item-desc {
+    font-size: 13px !important;
+    color: var(--np-text-muted) !important;
+}
+
+/* Action links on the right */
+.my-account-item-link a {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+    padding: 6px 14px !important;
+    background: var(--np-primary-light) !important;
+    color: var(--np-primary) !important;
+    border-radius: var(--np-radius-sm) !important;
+    font-size: 13px !important;
+    font-weight: 600 !important;
+    text-decoration: none !important;
+    transition: var(--np-transition) !important;
+    white-space: nowrap !important;
+}
+
+.my-account-item-link a:hover {
+    background: var(--np-primary) !important;
+    color: #ffffff !important;
+}
+
+.my-account-item-link a .edit-profile-icon,
+.my-account-item-link a .right-icon {
+    width: 14px !important;
+    height: 14px !important;
+}
+
+/* Item link text (ensure it shows on all screen sizes) */
+.my-account-item-link .item-link-text {
+    display: inline !important;
+}
+
+
+/* -------------------------------------------------------------------------- */
+/* 7. CARDS & PANELS (Used across portal pages: orders, invoices, etc.)        */
+/* -------------------------------------------------------------------------- */
+
+.frappe-card,
+.card {
+    background: var(--np-surface) !important;
+    border-radius: var(--np-radius-lg) !important;
+    border: 1px solid var(--np-border) !important;
+    box-shadow: var(--np-shadow) !important;
+    transition: var(--np-transition);
+    margin-bottom: 20px !important;
+}
+
+.frappe-card:hover,
+.card:hover {
+    box-shadow: var(--np-shadow-card) !important;
+}
+
+.card-header {
+    background: transparent !important;
+    border-bottom: 1px solid var(--np-border) !important;
+    padding: 16px 20px !important;
+    font-weight: 600 !important;
+}
+
+
+/* -------------------------------------------------------------------------- */
+/* 8. FORM CONTROLS (Match desk inputs — teal focus ring)                     */
+/* -------------------------------------------------------------------------- */
+
+.form-control,
+.input-with-feedback,
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"],
+input[type="tel"],
+input[type="url"],
+input[type="search"],
+input[type="date"],
+select.form-control,
+textarea.form-control {
+    background-color: #ffffff !important;
+    border: 1px solid #dcdfe3 !important;
+    border-radius: 6px !important;
+    color: #3b3f5c !important;
+    padding: 8px 14px !important;
+    font-size: 14px !important;
+    min-height: 40px !important;
+    box-shadow: none !important;
+    transition: all 0.2s ease-in-out !important;
+    line-height: 1.5 !important;
+    font-family: 'Outfit', sans-serif !important;
+}
+
+.form-control:hover,
+input[type="text"]:hover,
+input[type="email"]:hover,
+input[type="password"]:hover {
+    border-color: var(--np-border-hover) !important;
+}
+
+.form-control:focus,
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+textarea.form-control:focus,
+select.form-control:focus {
+    border-color: var(--np-primary) !important;
+    box-shadow: 0 0 0 3px var(--np-primary-glow) !important;
+    background-color: #ffffff !important;
+    outline: none !important;
+}
+
+
+/* -------------------------------------------------------------------------- */
+/* 9. BUTTONS (Primary matches desk teal, secondary is subtle)                */
+/* -------------------------------------------------------------------------- */
+
+.btn-primary,
+.btn-primary-dark {
+    background-color: var(--np-primary) !important;
+    border-color: var(--np-primary) !important;
+    color: #ffffff !important;
+    border-radius: 6px !important;
+    font-weight: 600 !important;
+    font-size: 14px !important;
+    padding: 8px 20px !important;
+    transition: var(--np-transition) !important;
+    font-family: 'Outfit', sans-serif !important;
+    box-shadow: none !important;
+}
+
+.btn-primary:hover,
+.btn-primary-dark:hover {
+    background-color: var(--np-primary-hover) !important;
+    border-color: var(--np-primary-hover) !important;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(15, 98, 106, 0.2) !important;
+}
+
+.btn-primary:focus,
+.btn-primary-dark:focus {
+    box-shadow: 0 0 0 3px var(--np-primary-glow) !important;
+}
+
+.btn-default,
+.btn-secondary,
+.btn-light {
+    background-color: var(--np-surface) !important;
+    border: 1px solid var(--np-border) !important;
+    color: var(--np-text) !important;
+    border-radius: 6px !important;
+    font-weight: 500 !important;
+    transition: var(--np-transition) !important;
+}
+
+.btn-default:hover,
+.btn-secondary:hover,
+.btn-light:hover {
+    border-color: var(--np-primary) !important;
+    color: var(--np-primary) !important;
+    background-color: var(--np-primary-light) !important;
+}
+
+
+/* -------------------------------------------------------------------------- */
+/* 10. BREADCRUMBS                                                            */
+/* -------------------------------------------------------------------------- */
+
+.page-breadcrumbs .breadcrumb {
+    background: transparent !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    font-size: 13px;
+}
+
+
+.page-breadcrumbs .breadcrumb-item a {
+    color: var(--np-text-muted) !important;
+    font-weight: 500;
+    text-decoration: none;
+}
+
+.page-breadcrumbs .breadcrumb-item a:hover {
+    color: var(--np-primary) !important;
+}
+
+.page-breadcrumbs .breadcrumb-item.active {
+    color: var(--np-primary) !important;
+    font-weight: 600;
+}
+
+
+/* -------------------------------------------------------------------------- */
+/* 11. TABLES (Used in order lists, invoice lists, etc.)                       */
+/* -------------------------------------------------------------------------- */
+
+.table {
+    border-collapse: separate !important;
+    border-spacing: 0 !important;
+}
+
+.table thead th {
+    background-color: var(--np-bg-alt) !important;
+    border-bottom: 2px solid var(--np-border) !important;
+    color: var(--np-text) !important;
+    font-size: 12px !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
+    font-weight: 700 !important;
+    padding: 12px 16px !important;
+}
+
+.table tbody td {
+    padding: 14px 16px !important;
+    border-bottom: 1px solid var(--np-border) !important;
+    color: var(--np-text) !important;
+    font-size: 14px !important;
+    vertical-align: middle !important;
+}
+
+.table tbody tr:hover td {
+    background-color: var(--np-primary-light) !important;
+}
+
+
+/* -------------------------------------------------------------------------- */
+/* 12. PORTAL LIST PAGES (e.g., /orders, /invoices, /tickets, /issues)        */
+/* -------------------------------------------------------------------------- */
+
+/* The pill/tag indicators */
+.indicator-pill {
+    font-size: 11px !important;
+    font-weight: 600 !important;
+    padding: 4px 10px !important;
+    border-radius: 20px !important;
+    letter-spacing: 0.3px;
+}
+
+/* Web list items (used in order/invoice lists) */
+.web-list-item,
+.portal-list-item {
+    background: var(--np-surface) !important;
+    border: 1px solid var(--np-border) !important;
+    border-radius: var(--np-radius-md) !important;
+    padding: 16px 20px !important;
+    margin-bottom: 8px !important;
+    transition: var(--np-transition) !important;
+}
+
+.web-list-item:hover,
+.portal-list-item:hover {
+    border-color: rgba(15, 98, 106, 0.2) !important;
+    box-shadow: var(--np-shadow-card) !important;
+    transform: translateX(3px);
+}
+
+
+/* -------------------------------------------------------------------------- */
+/* 13. FOOTER OVERHAUL                                                        */
+/* -------------------------------------------------------------------------- */
+
+footer,
+.web-footer {
+    background-color: var(--np-surface) !important;
+    border-top: 1px solid var(--np-border) !important;
+    color: var(--np-text-muted) !important;
+    padding: 20px 0 !important;
+    font-size: 13px !important;
+}
+
+footer a,
+.web-footer a {
+    color: var(--np-primary) !important;
+    font-weight: 500;
+}
+
+footer a:hover,
+.web-footer a:hover {
+    color: var(--np-primary-hover) !important;
+}
+
+/* Newsletter / subscribe input in footer */
+footer .form-control {
+    border-radius: 6px 0 0 6px !important;
+}
+
+footer .btn-primary {
+    border-radius: 0 6px 6px 0 !important;
+}
+
+
+/* -------------------------------------------------------------------------- */
+/* 14. ALERTS & NOTIFICATIONS                                                 */
+/* -------------------------------------------------------------------------- */
+
+.alert {
+    border-radius: var(--np-radius-md) !important;
+    border: none !important;
+    font-size: 14px !important;
+    font-weight: 500 !important;
+}
+
+.alert-primary {
+    background-color: var(--np-primary-light) !important;
+    color: var(--np-primary) !important;
+}
+
+
+/* -------------------------------------------------------------------------- */
+/* 15. PAGE HEADERS (Page titles on portal views)                             */
+/* -------------------------------------------------------------------------- */
+
+.page-header h2,
+.page_content>h3:first-child,
+.page_content>h2:first-child,
+.dashboard-header h2 {
+    font-size: 24px !important;
+    font-weight: 700 !important;
+    color: var(--np-text) !important;
+    margin-top: 0 !important;
+    margin-bottom: 12px !important;
+}
+
+
+
+/* -------------------------------------------------------------------------- */
+/* 16. WEB FORM STYLING                                                       */
+/* -------------------------------------------------------------------------- */
+
+.web-form-container {
+    background: var(--np-surface);
+    border-radius: var(--np-radius-lg);
+    border: 1px solid var(--np-border);
+    padding: 32px;
+    box-shadow: var(--np-shadow);
+}
+
+.web-form-container .form-group label,
+.web-form-container .frappe-control .control-label {
+    font-size: 13px !important;
+    font-weight: 600 !important;
+    color: var(--np-text) !important;
+    margin-bottom: 4px !important;
+}
+
+
+/* -------------------------------------------------------------------------- */
+/* 17. ADDRESS / CONTACT CARDS                                                */
+/* -------------------------------------------------------------------------- */
+
+.address-card,
+.address-box {
+    background: var(--np-surface) !important;
+    border: 1px solid var(--np-border) !important;
+    border-radius: var(--np-radius-md) !important;
+    padding: 20px !important;
+    margin-bottom: 16px !important;
+    transition: var(--np-transition) !important;
+    box-shadow: var(--np-shadow) !important;
+}
+
+.address-card:hover,
+.address-box:hover {
+    border-color: rgba(15, 98, 106, 0.2) !important;
+    box-shadow: var(--np-shadow-card) !important;
+}
+
+
+/* -------------------------------------------------------------------------- */
+/* 18. PAGINATION                                                             */
+/* -------------------------------------------------------------------------- */
+
+.page-item .page-link {
+    color: var(--np-text) !important;
+    border: 1px solid var(--np-border) !important;
+    border-radius: var(--np-radius-sm) !important;
+    font-size: 13px !important;
+    font-weight: 500 !important;
+    padding: 6px 14px !important;
+    margin: 0 2px !important;
+    transition: var(--np-transition) !important;
+}
+
+.page-item .page-link:hover {
+    background-color: var(--np-primary-light) !important;
+    color: var(--np-primary) !important;
+    border-color: var(--np-primary) !important;
+}
+
+.page-item.active .page-link {
+    background-color: var(--np-primary) !important;
+    border-color: var(--np-primary) !important;
+    color: #ffffff !important;
+}
+
+
+/* -------------------------------------------------------------------------- */
+/* 19. RESPONSIVE OVERRIDES                                                   */
+/* -------------------------------------------------------------------------- */
+
+@media (max-width: 991px) {
+    .sidebar-column {
+        min-height: auto !important;
+        border-right: none !important;
+        border-bottom: 1px solid var(--np-border) !important;
+        margin-bottom: 24px;
+    }
+
+    .main-column {
+        padding: 20px 16px !important;
+    }
+
+    .web-sidebar {
+        padding: 16px 0 !important;
+    }
+
+    .web-sidebar .sidebar-item a.active {
+        margin: 2px 8px !important;
+    }
+}
+
+@media (max-width: 575px) {
+    .account-info>.col {
+        padding: 16px !important;
+    }
+
+    .my-account-header {
+        font-size: 20px !important;
+    }
+
+    .main-column {
+        padding: 16px 12px !important;
+    }
+}
+
+
+/* -------------------------------------------------------------------------- */
+/* 20. DECORATIVE ACCENTS (Matching desk wave patterns)                       */
+/* -------------------------------------------------------------------------- */
+
+/* Subtle teal accent on the sidebar top */
+.web-sidebar::before {
+    content: '';
+    display: block;
+    height: 4px;
+    background: var(--np-gradient-teal);
+    margin: 0 20px 16px 20px;
+    border-radius: 2px;
+}
+
+/* Matching teal accent line on cards (first card on My Account) */
+.account-info>.col:first-child {
+    border-left: 4px solid var(--np-primary) !important;
+}
+
+/* Soft teal glow on active nav link in navbar */
+.navbar .nav-item.active>.nav-link,
+.navbar .nav-link.active {
+    color: var(--np-primary) !important;
+    background-color: var(--np-primary-light) !important;
+    font-weight: 600 !important;
+}
+
+
+/* -------------------------------------------------------------------------- */
+/* 21. PRINT VIEW CLEANUP (Matches desk print style slightly)                 */
+/* -------------------------------------------------------------------------- */
+
+.print-format {
+    font-family: 'Outfit', sans-serif !important;
+}
+
+
+/* -------------------------------------------------------------------------- */
+/* 22. MISCELLANEOUS / POLISH                                                 */
+/* -------------------------------------------------------------------------- */
+
+/* Scrollbar theming to match desk */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--np-bg-alt);
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: rgba(15, 98, 106, 0.2);
+    border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(15, 98, 106, 0.4);
+}
+
+/* Selection color */
+::selection {
+    background: var(--np-primary);
+    color: #ffffff;
+}
+
+::-moz-selection {
+    background: var(--np-primary);
+    color: #ffffff;
+}
+
+/* "Powered by" footer text */
+.powered {
+    font-size: 12px !important;
+    color: var(--np-text-secondary) !important;
+}
+
+/* Remove default bottom margin from the main container on portal */
+.container .page_content {
+    min-height: 60vh;
+}
+
+/* Pill buttons (like "Get Updates") */
+.btn-outline-primary {
+    color: var(--np-primary) !important;
+    border-color: var(--np-primary) !important;
+}
+
+.btn-outline-primary:hover {
+    background-color: var(--np-primary) !important;
+    color: #ffffff !important;
+}
+
+/* Badge / Tag styling */
+.badge {
+    font-size: 11px !important;
+    font-weight: 600 !important;
+    border-radius: 20px !important;
+    padding: 4px 10px !important;
+}
+
+.badge-primary,
+.badge.bg-primary {
+    background-color: var(--np-primary) !important;
+}
+
+/* User avatar on portal */
+.avatar-frame,
+.avatar-medium,
+.avatar-small {
+    border-radius: 50% !important;
+    border: 2px solid var(--np-primary-light) !important;
+}
+
+/* Subtle hover on all clickable items */
+.list-group-item {
+    border: 1px solid var(--np-border) !important;
+    transition: var(--np-transition);
+}
+
+.list-group-item:hover {
+    background-color: var(--np-primary-light) !important;
+}
+
+/* Web page full width override — match desk container-fluid */
+.container {
+    max-width: 100% !important;
+    width: 100% !important;
+}

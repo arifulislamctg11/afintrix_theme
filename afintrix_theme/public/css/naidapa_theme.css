@@ -1,0 +1,1339 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
+
+/* --- CUSTOM MENU ITEM STYLES --- */
+.page-container {
+    background: var(--np-bg) !important;
+}
+
+.afintrix-nav-group {
+    margin-bottom: 24px;
+}
+
+.afintrix-nav-title {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text-secondary);
+    font-weight: 700;
+    padding: 0 24px;
+    margin-bottom: 12px;
+}
+
+.afintrix-nav-item {
+    display: flex;
+    align-items: center;
+    padding: 10px 24px;
+    color: var(--text-primary);
+    text-decoration: none !important;
+    font-weight: 500;
+    transition: var(--transition-fast);
+    cursor: pointer;
+    border-left: 3px solid transparent;
+}
+
+.afintrix-nav-item i {
+    width: 20px;
+    text-align: center;
+    margin-right: 12px;
+    font-size: 16px;
+    color: var(--text-secondary);
+    transition: var(--transition-fast);
+}
+
+.afintrix-nav-item:hover {
+    background-color: var(--bg-color);
+    color: var(--primary-color);
+}
+
+.afintrix-nav-item:hover i {
+    color: var(--primary-color);
+    transform: scale(1.1);
+}
+
+.afintrix-nav-item.active {
+    background-color: rgba(32, 178, 170, 0.1);
+    /* Primary color w/ opacity */
+    color: var(--primary-color);
+    border-left-color: var(--primary-color);
+}
+
+.afintrix-nav-item.active i {
+    color: var(--primary-color);
+}
+
+/* --- END CUSTOM NAV OVERRIDES --- */
+
+
+:root {
+    /* KI Admin Base Palette (Isolated with --ki- prefix to prevent Frappe UI breaks) */
+    --ki-primary: 15, 98, 106;
+    --ki-secondary: 98, 98, 98;
+    --ki-success: 10, 185, 100;
+    --ki-danger: 225, 78, 90;
+    --ki-warning: 249, 193, 35;
+    --ki-info: 65, 150, 250;
+    --ki-light: 200, 185, 210;
+    --ki-dark: 40, 35, 45;
+    --ki-white: 255, 255, 255;
+
+    /* Frappe Native Primary Variables */
+    --primary: #0f626a;
+    --np-bg: #f5fbfb;
+    --font-color: #082f32;
+    --body-color: #f5fbfb;
+    --bodybg-color: #f6f7fa;
+    --font-light-color: #a0a0b0;
+    --grid_color: rgba(144, 164, 246, 0.21);
+    --border_color: rgba(0, 0, 0, 0.21);
+    --black: 0, 0, 0;
+    --border_color: #ebedf0;
+    --bs-dropdown-link-active-color: rgba(var(--ki-primary), 1);
+    --bs-dropdown-link-active-bg: rgba(var(--ki-primary), 0.2);
+
+    /* Variables mapped for Frappe widgets */
+    --primary-color: var(--primary);
+    --primary-hover: #0c4e55;
+    --bg-color: var(--bodybg-color);
+    --surface-color: #ffffff;
+    --text-primary: var(--font-color);
+    --text-secondary: var(--font-light-color);
+    --border-color-frappe: var(--border_color);
+
+    --box-shadow: 0 .1rem 0.5rem 0 rgba(var(--dark), .10);
+    --hover-shadow: 0 0.5rem 2rem var(--light-gray);
+    --app-transition: all 0.3s ease;
+    --light-gray: #f4f7f8;
+
+    /* UI Elements */
+    --glass-border: 1px solid rgba(255, 255, 255, 0.3);
+    --glass-shadow: var(--box-shadow);
+    --backdrop-blur: blur(12px);
+
+    /* Layout */
+    --radius-lg: 12px;
+    --radius-md: 8px;
+    --radius-sm: 4px;
+    --transition-fast: var(--app-transition);
+}
+
+/* Global Typography Override */
+body {
+    font-family: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif !important;
+    background-color: var(--bg-color) !important;
+    color: var(--text-primary) !important;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* --- GLOBAL SYSTEM INPUT TWEAKS (KI-ADMIN BASE INPUT STYLE) --- */
+.form-control:not([type="checkbox"]):not([type="radio"]),
+.input-with-feedback:not([type="checkbox"]):not([type="radio"]),
+.frappe-control input:not([type="checkbox"]):not([type="radio"]),
+.frappe-control select,
+.frappe-control textarea,
+.awesomplete>input {
+    background-color: #ffffff !important;
+    border: 1px solid #dcdfe3 !important;
+    border-radius: 6px !important;
+    color: #3b3f5c !important;
+    padding: 8px 14px !important;
+    font-size: 14px !important;
+    min-height: 40px !important;
+    box-shadow: none !important;
+    transition: all 0.2s ease-in-out !important;
+    line-height: 1.5 !important;
+}
+
+/* Fix select vertical alignment */
+.frappe-control select,
+select.form-control,
+select.input-with-feedback {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    height: 40px !important;
+    line-height: normal !important;
+}
+
+/* Hover effect */
+.form-control:not([type="checkbox"]):not([type="radio"]):hover,
+.input-with-feedback:not([type="checkbox"]):not([type="radio"]):hover,
+.frappe-control input:not([type="checkbox"]):not([type="radio"]):hover,
+.frappe-control select:hover,
+.awesomplete>input:hover {
+    border-color: #b0b9c4 !important;
+}
+
+/* Focus effect (Teal Highlight) */
+.form-control:not([type="checkbox"]):not([type="radio"]):focus,
+.input-with-feedback:not([type="checkbox"]):not([type="radio"]):focus,
+.frappe-control input:not([type="checkbox"]):not([type="radio"]):focus,
+.frappe-control select:focus,
+.frappe-control textarea:focus,
+.awesomplete>input:focus {
+    border-color: var(--primary-color) !important;
+    box-shadow: 0 0 0 3px rgba(15, 98, 106, 0.15) !important;
+    background-color: #ffffff !important;
+    outline: none !important;
+}
+
+/* Disabled / Read-Only Fields (KI-Admin Base Style) */
+.form-control:not([type="checkbox"]):not([type="radio"]):disabled,
+.form-control:not([type="checkbox"]):not([type="radio"])[readonly],
+.input-with-feedback:not([type="checkbox"]):not([type="radio"]):disabled,
+.input-with-feedback:not([type="checkbox"]):not([type="radio"])[readonly],
+.frappe-control input:not([type="checkbox"]):not([type="radio"]):disabled,
+.frappe-control input:not([type="checkbox"]):not([type="radio"])[readonly],
+.frappe-control select:disabled,
+.frappe-control textarea:disabled,
+.control-value.like-disabled-input {
+    background-color: #f8f9fa !important;
+    border: 1px solid #dcdfe3 !important;
+    border-radius: 6px !important;
+    color: #495057 !important;
+    padding: 8px 14px !important;
+    font-size: 14px !important;
+    min-height: 40px !important;
+    box-shadow: none !important;
+    cursor: default !important;
+    font-weight: 500 !important;
+}
+
+.control-value.like-disabled-input {
+    width: 100% !important;
+    margin: 0 !important;
+    line-height: 1.5 !important;
+}
+
+
+/* Fix checkbox and radios mapping */
+.frappe-control input[type="checkbox"],
+.frappe-control input[type="radio"] {
+    min-height: auto !important;
+    cursor: pointer;
+}
+
+/* Permanently hide Frappe's native workspace sidebars everywhere */
+.layout-side-section,
+.desk-sidebar,
+.sidebar-toggle-btn,
+body.afintrix-theme-active .layout-side-section,
+body.afintrix-theme-active .sidebar-toggle-btn,
+body.afintrix-theme-active .desk-sidebar {
+    display: none !important;
+    width: 0 !important;
+    max-width: 0 !important;
+    min-width: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    border: none !important;
+    overflow: hidden !important;
+}
+
+body.afintrix-theme-active .layout-main-section,
+body.afintrix-theme-active .layout-main {
+    width: 100% !important;
+    max-width: 100% !important;
+    flex: 1 1 100% !important;
+}
+
+/* Style Frappe Native Navbar instead of hiding it */
+body.afintrix-theme-active .sticky-top .navbar {
+    background-color: var(--surface-color);
+    backdrop-filter: var(--backdrop-blur);
+    border-bottom: var(--glass-border);
+    padding: 12px 24px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+/* Hide Frappe's native application logo in the navbar */
+body.afintrix-theme-active .sticky-top .navbar-brand.navbar-home {
+    display: none !important;
+}
+
+/* Hide the custom empty header since we are styling the native one */
+body.afintrix-theme-active .header-main {
+    display: none !important;
+}
+
+/* Force container fluid if JS hasn't swapped the class yet */
+body.afintrix-theme-active .container {
+    max-width: 100% !important;
+    width: 100% !important;
+}
+
+/* App Wrapper based on KI Admin */
+body.afintrix-theme-active .app-wrapper,
+.app-wrapper {
+    display: flex;
+    overflow-x: hidden;
+    position: relative;
+    width: 100%;
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+}
+
+/* Ensure sidebar sits flush at top 0 above native sticky navbars */
+body.afintrix-theme-active nav.vertical-sidebar,
+nav.vertical-sidebar {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    bottom: 0 !important;
+    height: 100vh !important;
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+    width: 286px;
+    z-index: 1030 !important;
+    transition: width 0.3s ease;
+}
+
+body.afintrix-theme-active nav.vertical-sidebar .app-logo,
+nav.vertical-sidebar .app-logo {
+    margin-top: 0 !important;
+}
+
+body.afintrix-theme-active .sticky-top {
+    top: 0 !important;
+    margin-top: 0 !important;
+}
+
+.app-wrapper .app-content {
+    height: 100vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-left: 286px;
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+    transition: padding-left 0.3s ease;
+    width: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+/* User Avatar circle in sidebar */
+nav.vertical-sidebar .nav-profile-wrapper {
+    padding: 10px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1px dashed var(--border-color);
+}
+
+nav.vertical-sidebar .nav-profile-wrapper .user-avatar-circle {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #0f626a;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(15, 98, 106, 0.2);
+}
+
+/* Semi-nav (collapsed sidebar) desktop overrides - EXACT MATCH FOR KI-ADMIN SPECIFICITY */
+@media (min-width: 992px) {
+    .app-wrapper nav.semi-nav ~ .app-content,
+    body.sidebar-menu-opened .app-wrapper .app-content {
+        padding-left: 80px !important;
+    }
+
+    nav.semi-nav,
+    body.sidebar-menu-opened nav.vertical-sidebar {
+        width: 80px !important;
+    }
+
+    nav.semi-nav:not(:hover) .app-logo,
+    body.sidebar-menu-opened nav.vertical-sidebar:not(:hover) .app-logo {
+        padding: 0 !important;
+        justify-content: center !important;
+        height: 56px !important;
+    }
+
+    nav.semi-nav:not(:hover) .app-logo img,
+    body.sidebar-menu-opened nav.vertical-sidebar:not(:hover) .app-logo img {
+        max-width: 42px !important;
+        max-height: 36px !important;
+        object-fit: contain !important;
+        margin: 0 auto !important;
+    }
+
+    nav.semi-nav:not(:hover) .menu-title,
+    body.sidebar-menu-opened nav.vertical-sidebar:not(:hover) .menu-title {
+        display: none !important;
+    }
+
+    /* KI Theme Native Selector: .app-wrapper .semi-nav .app-nav .main-nav li a (Specificity 0,4,2) */
+    .app-wrapper .semi-nav .app-nav .main-nav li a,
+    body.sidebar-menu-opened nav.vertical-sidebar:not(:hover) .app-nav .main-nav li a {
+        font-size: 0 !important;
+        text-align: center !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+        width: 52px !important;
+        height: 52px !important;
+        padding: 6px 2px !important;
+        margin: 6px auto !important;
+        border-radius: 12px !important;
+    }
+
+    .app-wrapper .semi-nav .app-nav .main-nav li a svg,
+    .app-wrapper .semi-nav .app-nav .main-nav li a iconify-icon,
+    .app-wrapper .semi-nav .app-nav .main-nav li a .sidebar-item-icon {
+        margin: 0 auto !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        font-size: 20px !important;
+        width: 22px !important;
+        height: 22px !important;
+    }
+
+    .app-wrapper .semi-nav .app-nav .main-nav li a .sidebar-item-label,
+    body.sidebar-menu-opened nav.vertical-sidebar:not(:hover) .app-nav .main-nav li a .sidebar-item-label {
+        display: none !important;
+        font-size: 0 !important;
+        opacity: 0 !important;
+        visibility: hidden !important;
+    }
+
+    .app-wrapper .semi-nav .app-nav .main-nav li > a::after {
+        display: none !important;
+    }
+
+    .app-wrapper .semi-nav .app-nav .main-nav li.active > a {
+        background-color: #0f626a !important;
+        color: #ffffff !important;
+        box-shadow: 0 4px 14px rgba(15, 98, 106, 0.35) !important;
+    }
+
+    /* Expand sidebar on hover when collapsed */
+    nav.semi-nav:hover,
+    body.sidebar-menu-opened nav.vertical-sidebar:hover {
+        width: 286px !important;
+        box-shadow: 4px 0 25px rgba(0,0,0,0.12) !important;
+        z-index: 1040 !important;
+    }
+
+    .app-wrapper .semi-nav:hover .menu-title,
+    body.sidebar-menu-opened nav.vertical-sidebar:hover .menu-title {
+        display: block !important;
+    }
+
+    .app-wrapper .semi-nav:hover .app-nav .main-nav li a,
+    body.sidebar-menu-opened nav.vertical-sidebar:hover .app-nav .main-nav li a {
+        font-size: 14px !important;
+        text-align: left !important;
+        flex-direction: row !important;
+        justify-content: flex-start !important;
+        align-items: center !important;
+        padding: 10px 14px !important;
+        width: 100% !important;
+        height: auto !important;
+        margin: 4px 0 !important;
+        border-radius: 10px !important;
+    }
+
+    .app-wrapper .semi-nav:hover .app-nav .main-nav li a svg,
+    .app-wrapper .semi-nav:hover .app-nav .main-nav li a iconify-icon,
+    .app-wrapper .semi-nav:hover .app-nav .main-nav li a .sidebar-item-icon {
+        margin-right: 8px !important;
+        margin-left: 0 !important;
+    }
+
+    .app-wrapper .semi-nav:hover .app-nav .main-nav li a .sidebar-item-label,
+    body.sidebar-menu-opened nav.vertical-sidebar:hover .app-nav .main-nav li a .sidebar-item-label {
+        display: inline-block !important;
+        font-size: 14px !important;
+        font-weight: 500 !important;
+        text-transform: capitalize !important;
+        margin-left: 8px !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+    }
+}
+
+/* Bordered Group Box Container & Submenu Styling */
+.vertical-sidebar .main-nav > li.sidebar-group-item {
+    margin: 4px 0;
+}
+
+.vertical-sidebar .main-nav > li.sidebar-group-item > a.sidebar-group-header,
+.vertical-sidebar .main-nav > li.sidebar-group-item > a.sidebar-group-header[aria-expanded="true"],
+.vertical-sidebar .main-nav > li.sidebar-group-item > a.sidebar-group-header:not(.collapsed) {
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    color: var(--text-primary, #2d3748) !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    margin-bottom: 0 !important;
+    padding: 10px 14px !important;
+}
+
+.vertical-sidebar .main-nav > li.sidebar-group-item > a.sidebar-group-header .sidebar-item-label,
+.vertical-sidebar .main-nav > li.sidebar-group-item > a.sidebar-group-header[aria-expanded="true"] .sidebar-item-label {
+    font-size: 14px !important;
+    font-weight: 600 !important;
+}
+
+.vertical-sidebar .main-nav > li.sidebar-group-item > a.sidebar-group-header:hover {
+    background: rgba(0, 0, 0, 0.03) !important;
+    color: #0f626a !important;
+}
+
+/* Fix Group Header Chevron Arrow Vertical Position */
+nav .app-nav .main-nav > li:not(.menu-title) > a,
+.vertical-sidebar .main-nav > li > a {
+    position: relative !important;
+}
+
+nav .app-nav .main-nav > li:not(.menu-title) > a::after,
+.vertical-sidebar .main-nav > li > a::after,
+.vertical-sidebar .main-nav > li > a[aria-expanded="true"]::after,
+.vertical-sidebar .main-nav > li > a[aria-expanded="false"]::after {
+    position: absolute !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    right: 1.25rem !important;
+    margin: 0 !important;
+}
+
+/* Bordered Group Box Container */
+.vertical-sidebar .main-nav ul.sidebar-group-box {
+    border: 1px solid var(--border-color, #e2e8f0) !important;
+    border-radius: 12px !important;
+    padding: 6px !important;
+    margin: 6px 12px 10px 12px !important;
+    background-color: rgba(255, 255, 255, 0.85) !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04) !important;
+    list-style: none !important;
+}
+
+/* Submenu items inside group box */
+.vertical-sidebar .main-nav ul.sidebar-group-box li.sidebar-sub-item {
+    margin: 2px 0 !important;
+    padding: 0 !important;
+    list-style: none !important;
+}
+
+.vertical-sidebar .main-nav ul.sidebar-group-box li.sidebar-sub-item a.sidebar-sub-link {
+    display: flex !important;
+    align-items: center !important;
+    padding: 8px 12px !important;
+    border-radius: 8px !important;
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    color: var(--text-color, #4a5568) !important;
+    text-decoration: none !important;
+    transition: all 0.2s ease !important;
+    margin: 0 !important;
+    width: 100% !important;
+}
+
+/* Hide any pseudo arrows/bullets on submenu items */
+.vertical-sidebar .main-nav ul.sidebar-group-box li::before,
+.vertical-sidebar .main-nav ul.sidebar-group-box li::after,
+.vertical-sidebar .main-nav ul.sidebar-group-box li a::before,
+.vertical-sidebar .main-nav ul.sidebar-group-box li a::after {
+    display: none !important;
+    content: "" !important;
+    width: 0 !important;
+    height: 0 !important;
+}
+
+.vertical-sidebar .main-nav ul.sidebar-group-box li.sidebar-sub-item a.sidebar-sub-link .sidebar-item-icon {
+    margin-right: 8px !important;
+    font-size: 18px !important;
+    display: flex !important;
+    align-items: center !important;
+}
+
+/* ONLY Submenu item gets hover & active design! */
+.vertical-sidebar .main-nav ul.sidebar-group-box li.sidebar-sub-item a.sidebar-sub-link:hover {
+    background-color: rgba(15, 98, 106, 0.1) !important;
+    color: #0f626a !important;
+}
+
+.vertical-sidebar .main-nav ul.sidebar-group-box li.sidebar-sub-item.active a.sidebar-sub-link,
+.vertical-sidebar .main-nav ul.sidebar-group-box li.sidebar-sub-item a.sidebar-sub-link.active {
+    background-color: #0f626a !important;
+    color: #ffffff !important;
+    box-shadow: 0 3px 10px rgba(15, 98, 106, 0.25) !important;
+}
+
+.vertical-sidebar .main-nav ul.sidebar-group-box li.sidebar-sub-item.active a.sidebar-sub-link iconify-icon,
+.vertical-sidebar .main-nav ul.sidebar-group-box li.sidebar-sub-item a.sidebar-sub-link.active iconify-icon {
+    color: #ffffff !important;
+}
+
+/* Application Header overrides */
+.header-main {
+    background-color: var(--surface-color);
+    backdrop-filter: var(--backdrop-blur);
+    padding: 15px 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+
+nav .app-logo {
+    align-items: center;
+    border-bottom: 1px dashed var(--border_color);
+    display: flex;
+    height: 70px;
+    padding: 0 20px;
+    white-space: nowrap;
+}
+
+nav .app-nav {
+    height: calc(100vh - 70px);
+    overflow-y: auto;
+}
+
+nav .app-nav .main-nav {
+    list-style: none;
+    margin: 0;
+}
+
+nav .app-nav .menu-title span {
+    color: var(--font-light-color);
+    display: block;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .5px;
+    margin-bottom: 2px;
+    padding-bottom: 10px;
+    padding-top: 20px;
+    text-transform: uppercase;
+}
+
+nav .app-nav .main-nav>li>a {
+    border-radius: 5px;
+    color: var(--font-color);
+    display: block !important;
+    font-size: 15px;
+    font-weight: 500;
+    margin-bottom: 4px;
+    padding: 10px 14px;
+    text-transform: capitalize;
+    transition: var(--app-transition);
+    white-space: nowrap;
+    text-decoration: none;
+}
+
+nav .app-nav .main-nav>li>a:hover {
+    background-color: rgba(var(--primary), .1);
+    color: rgba(var(--primary), 1);
+}
+
+nav .app-nav .main-nav>li.active>a {
+    background-color: #12715b !important;
+    color: #ffffff !important;
+}
+
+nav .app-nav .main-nav>li>a svg {
+    height: 20px;
+    width: 20px;
+    stroke-width: 1.5;
+    fill: none;
+    transition: var(--app-transition);
+}
+
+nav .app-nav .main-nav>li>a iconify-icon {
+    transition: var(--app-transition);
+}
+
+nav .app-nav .main-nav>li:hover>a svg,
+nav .app-nav .main-nav>li:hover>a iconify-icon {
+    stroke: rgba(var(--primary), 1);
+    color: rgba(var(--primary), 1);
+}
+
+nav .app-nav .main-nav>li.active>a svg,
+nav .app-nav .main-nav>li.active>a iconify-icon {
+    stroke: #ffffff !important;
+    color: #ffffff !important;
+}
+
+/* Responsive container adjustment */
+.page-head {
+    max-width: 100% !important;
+    background-color: #ffffff;
+    border-bottom: 1px solid var(--border-color);
+}
+
+/* Sidebar Toggle and Responsiveness */
+@media (min-width: 992px) {
+
+    /* The desktop hide logic is completely removed so the semi-nav class can dictate standard shrinking instead of hiding entirely */
+    body.sidebar-menu-opened nav:not(.semi-nav) {
+        margin-left: -286px;
+    }
+}
+
+@media (max-width: 991px) {
+    nav {
+        margin-left: -286px;
+    }
+
+    .app-wrapper .app-content {
+        padding-left: 15px;
+        padding-right: 15px;
+        width: 100%;
+    }
+
+    /* On mobile, sidebar-menu-opened shows the sidebar */
+    body.sidebar-menu-opened nav {
+        margin-left: 0;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    }
+}
+
+/* -------------------------------------------------------------------------- */
+/* MODERN WIDGET CARDS - KI-Admin Theme Override                              */
+/* -------------------------------------------------------------------------- */
+
+/* 1. The Card Container */
+.frappe-card,
+.desk-sidebar {
+    background: var(--surface-color) !important;
+    border-radius: var(--radius-lg) !important;
+    border: 1px solid var(--border-color-frappe) !important;
+    box-shadow: var(--box-shadow) !important;
+    transition: var(--transition-fast);
+    margin-bottom: 24px !important;
+}
+
+.widget:hover,
+.frappe-card:hover {
+    box-shadow: var(--hover-shadow) !important;
+}
+
+/* 2. Header Area */
+.widget .widget-head {
+    padding: 16px 24px !important;
+    background: transparent !important;
+}
+
+.widget .widget-title {
+    font-weight: 600 !important;
+    font-size: 16px !important;
+    color: var(--text-primary) !important;
+    letter-spacing: 0;
+    margin: 0 !important;
+    text-transform: capitalize;
+}
+
+.widget .widget-subtitle {
+    display: none !important;
+}
+
+/* 3. The Widget Box Pattern Base */
+.links-widget-box {
+    background-color: var(--surface-color) !important;
+    background-repeat: no-repeat !important;
+    padding: 1.2rem !important;
+    position: relative;
+    overflow: hidden;
+    /* Ensure vector curves don't clip outside rounded corners */
+}
+
+/* 6 Dynamic Overlapping Fluid "Wave" Patterns */
+/* Generates sharp, crisp curved vectors overlapping at bottom right and top-left */
+.ce-block:nth-child(6n+1) .links-widget-box {
+    background-image:
+        radial-gradient(circle at 100% 100%, rgba(77, 182, 172, 0.11) 25%, transparent 25.5%),
+        radial-gradient(ellipse 120% 80% at 85% 110%, rgba(77, 182, 172, 0.07) 40%, transparent 40.5%),
+        radial-gradient(ellipse 80% 100% at 0% 0%, rgba(77, 182, 172, 0.09) 20%, transparent 20.5%),
+        radial-gradient(circle at -5% 5%, rgba(77, 182, 172, 0.06) 30%, transparent 30.5%) !important;
+}
+
+.ce-block:nth-child(6n+2) .links-widget-box {
+    background-image:
+        radial-gradient(circle at 90% 110%, rgba(77, 182, 172, 0.09) 30%, transparent 30.5%),
+        radial-gradient(ellipse 80% 120% at 100% 85%, rgba(77, 182, 172, 0.06) 35%, transparent 35.5%),
+        radial-gradient(circle at 0% 0%, rgba(77, 182, 172, 0.07) 25%, transparent 25.5%),
+        radial-gradient(ellipse 100% 80% at 10% -10%, rgba(77, 182, 172, 0.10) 35%, transparent 35.5%) !important;
+}
+
+.ce-block:nth-child(6n+3) .links-widget-box {
+    background-image:
+        radial-gradient(ellipse 100% 100% at 115% 90%, rgba(77, 182, 172, 0.10) 35%, transparent 35.5%),
+        radial-gradient(ellipse 130% 90% at 75% 115%, rgba(77, 182, 172, 0.07) 45%, transparent 45.5%),
+        radial-gradient(ellipse 90% 110% at -5% -5%, rgba(77, 182, 172, 0.09) 30%, transparent 30.5%),
+        radial-gradient(ellipse 110% 90% at 5% -15%, rgba(77, 182, 172, 0.06) 40%, transparent 40.5%) !important;
+}
+
+.ce-block:nth-child(6n+4) .links-widget-box {
+    background-image:
+        radial-gradient(ellipse 90% 110% at 105% 95%, rgba(77, 182, 172, 0.11) 25%, transparent 25.5%),
+        radial-gradient(circle at 65% 120%, rgba(77, 182, 172, 0.07) 40%, transparent 40.5%),
+        radial-gradient(circle at -10% -10%, rgba(77, 182, 172, 0.11) 35%, transparent 35.5%),
+        radial-gradient(ellipse 80% 120% at 15% -5%, rgba(77, 182, 172, 0.07) 25%, transparent 25.5%) !important;
+}
+
+.ce-block:nth-child(6n+5) .links-widget-box {
+    background-image:
+        radial-gradient(ellipse 110% 120% at 95% 115%, rgba(77, 182, 172, 0.10) 40%, transparent 40.5%),
+        radial-gradient(ellipse 80% 100% at 120% 80%, rgba(77, 182, 172, 0.06) 30%, transparent 30.5%),
+        radial-gradient(ellipse 100% 100% at -15% 10%, rgba(77, 182, 172, 0.10) 20%, transparent 20.5%),
+        radial-gradient(ellipse 120% 80% at 0% -5%, rgba(77, 182, 172, 0.06) 35%, transparent 35.5%) !important;
+}
+
+.ce-block:nth-child(6n+6) .links-widget-box {
+    background-image:
+        radial-gradient(ellipse 120% 100% at 105% 100%, rgba(77, 182, 172, 0.09) 30%, transparent 30.5%),
+        radial-gradient(ellipse 100% 130% at 85% 110%, rgba(77, 182, 172, 0.07) 45%, transparent 45.5%),
+        radial-gradient(circle at 5% -10%, rgba(77, 182, 172, 0.07) 30%, transparent 30.5%),
+        radial-gradient(ellipse 90% 100% at -10% 15%, rgba(77, 182, 172, 0.09) 25%, transparent 25.5%) !important;
+}
+
+/* 4. Button/Link Items (The Rows) inside Links Widget */
+.links-widget-box .link-item {
+    display: flex !important;
+    align-items: center !important;
+    position: relative;
+    padding: 12px 16px !important;
+    margin: 10px 0 !important;
+    /* Spaced like separate cards */
+    border-radius: 8px !important;
+    color: var(--font-color) !important;
+    font-weight: 500 !important;
+    font-size: 14px !important;
+    background: var(--surface-color) !important;
+    border: 1px solid rgba(0, 0, 0, 0.06) !important;
+    border-left: 4px solid var(--primary-color) !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.01) !important;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
+    text-decoration: none !important;
+}
+
+/* Faux Soft Rounded Icon is completely removed for cleaner card look */
+.links-widget-box .link-item::before {
+    display: none !important;
+}
+
+/* Hover Effect for Link Cards */
+.links-widget-box .link-item:hover {
+    transform: translateX(4px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.05) !important;
+    border-right-color: rgba(0, 0, 0, 0.02) !important;
+    border-top-color: rgba(0, 0, 0, 0.02) !important;
+    border-bottom-color: rgba(0, 0, 0, 0.02) !important;
+    background: #fdfdfd !important;
+}
+
+/* 4. The Content and Text */
+.links-widget-box .link-content {
+    display: flex !important;
+    align-items: center !important;
+    width: 100%;
+    justify-content: space-between;
+}
+
+/* 5. The Arrow Icon (SVG) */
+.links-widget-box .link-item svg.es-icon {
+    width: 18px !important;
+    height: 18px !important;
+    background: transparent !important;
+    padding: 0 !important;
+    stroke: var(--font-light-color) !important;
+    fill: none !important;
+    transition: all 0.3s ease;
+}
+
+/* Show Arrow on Hover */
+.links-widget-box .link-item:hover svg.es-icon {
+    stroke: var(--primary-color) !important;
+    transform: translateX(3px);
+}
+
+/* Hide Footer if empty */
+.widget-footer {
+    display: none !important;
+}
+
+
+
+.shortcut-widget-box {
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: stretch;
+    position: relative;
+    padding: 1.25rem 1.25rem;
+    min-height: 68px;
+    background-color: var(--surface-color) !important;
+    border-radius: var(--radius-md);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.02);
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    border: 1px solid rgba(0, 0, 0, 0.04);
+    overflow: hidden;
+    z-index: 1;
+}
+
+/* Unique Modern Element: Expanding accent corner */
+.shortcut-widget-box::before {
+    content: '';
+    position: absolute;
+    right: -24px;
+    top: -24px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    opacity: 0.3;
+    transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+    z-index: -1;
+}
+
+.shortcut-widget-box:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.06);
+}
+
+.shortcut-widget-box:hover::before {
+    transform: scale(3.5);
+    opacity: 0.85;
+}
+
+/* Hover colored variations using parent nth-child */
+.ce-block:nth-child(6n+1) .shortcut-widget-box::before {
+    background-color: #86efac;
+}
+
+.ce-block:nth-child(6n+1) .shortcut-widget-box:hover .widget-control svg.es-icon {
+    stroke: #15803d !important;
+}
+
+.ce-block:nth-child(6n+2) .shortcut-widget-box::before {
+    background-color: #fcd34d;
+}
+
+.ce-block:nth-child(6n+2) .shortcut-widget-box:hover .widget-control svg.es-icon {
+    stroke: #b45309 !important;
+}
+
+.ce-block:nth-child(6n+3) .shortcut-widget-box::before {
+    background-color: #93c5fd;
+}
+
+.ce-block:nth-child(6n+3) .shortcut-widget-box:hover .widget-control svg.es-icon {
+    stroke: #1d4ed8 !important;
+}
+
+.ce-block:nth-child(6n+4) .shortcut-widget-box::before {
+    background-color: #f9a8d4;
+}
+
+.ce-block:nth-child(6n+4) .shortcut-widget-box:hover .widget-control svg.es-icon {
+    stroke: #be185d !important;
+}
+
+.ce-block:nth-child(6n+5) .shortcut-widget-box::before {
+    background-color: #fca5a5;
+}
+
+.ce-block:nth-child(6n+5) .shortcut-widget-box:hover .widget-control svg.es-icon {
+    stroke: #b91c1c !important;
+}
+
+.ce-block:nth-child(6n+6) .shortcut-widget-box::before {
+    background-color: #c4b5fd;
+}
+
+.ce-block:nth-child(6n+6) .shortcut-widget-box:hover .widget-control svg.es-icon {
+    stroke: #6d28d9 !important;
+}
+
+/* Content adjustments */
+.shortcut-widget-box .widget-head {
+    padding: 0 !important;
+    background: transparent !important;
+}
+
+.shortcut-widget-box .widget-title {
+    font-size: 15px !important;
+    font-weight: 500 !important;
+    color: var(--font-color) !important;
+}
+
+.shortcut-widget-box .widget-control svg.es-icon {
+    width: 18px !important;
+    height: 18px !important;
+    stroke: var(--font-light-color) !important;
+    transition: var(--app-transition);
+}
+
+.shortcut-widget-box:hover .widget-control svg.es-icon {
+    transform: translate(2px, -2px);
+}
+
+/* --- OVERRIDE KI-ADMIN MISSING ICONS --- */
+/* The KI-Admin template relies on a "Phosphor-Bold" icon font for the dropdown arrows.
+   Since we don't have this font, we'll swap the ::after pseudo element to use a native SVG chevron. */
+nav .app-nav .main-nav>li:not(.menu-title)>a::after {
+    content: "" !important;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E") !important;
+    background-repeat: no-repeat !important;
+    background-position: center !important;
+    background-size: 12px 12px !important;
+    width: 16px !important;
+    height: 16px !important;
+    right: 1.25rem !important;
+    top: 50% !important;
+    transform: translateY(-50%) rotate(-90deg) !important;
+    transition: transform 0.2s ease !important;
+}
+
+/* Rotate the SVG natively when the sub-menu is expanded to point downwards */
+nav .app-nav .main-nav>li:not(.menu-title)>a[aria-expanded="true"]::after {
+    transform: translateY(-50%) rotate(0deg) !important;
+}
+
+/* Hide the dropdown arrow entirely when the sidebar is in semi-nav state */
+nav.semi-nav .app-nav .main-nav>li:not(.menu-title)>a::after {
+    display: none !important;
+}
+
+.sidebar-item-icon {
+    width: 20px;
+    height: 20px;
+}
+
+span.sidebar-item-label {
+    margin-left: 5px;
+}
+
+.sidebar-item-icon iconify-icon {
+    font-size: 20px;
+    top: 3px;
+    position: relative;
+}
+
+[data-page-route="Workspaces"] .layout-main .layout-main-section {
+    padding: 0px !important;
+    border: 1px solid transparent !important;
+    background-color: transparent !important;
+}
+
+.links-widget-box {
+    padding: 10px;
+    box-shadow: var(--box-shadow);
+    border: 1px solid var(--border-color-frappe);
+}
+
+/* -------------------------------------------------------------------------- */
+/* PREMIUM GRADIENT CHART OVERRIDES (SPLINES & DOTTED END)                    */
+/* -------------------------------------------------------------------------- */
+
+.frappe-chart .line-graph-path {
+    stroke: url(#afintrix-gradient) !important;
+    stroke-width: 4.5px !important;
+    stroke-linecap: round !important;
+    stroke-linejoin: round !important;
+
+    /* 
+      CSS Mask Trick: 
+      Layer 1 is solid black for 70% of the chart width, then transparent.
+      Layer 2 is a repeating dotted pattern across the entire width.
+      Composited together, 70% is solid, the last 30% is rendering dots!
+    */
+    -webkit-mask-image:
+        linear-gradient(to right, black 70%, transparent 70.5%),
+        repeating-linear-gradient(to right, black 0px, black 6px, transparent 6px, transparent 14px);
+    mask-image:
+        linear-gradient(to right, black 70%, transparent 70.5%),
+        repeating-linear-gradient(to right, black 0px, black 6px, transparent 6px, transparent 14px);
+}
+
+/* Hide scattered data points per image */
+.frappe-chart .dataset-units circle {
+    display: none !important;
+}
+
+/* Remove default faint fill so line is distinct */
+.frappe-chart path.region-fill {
+    display: none !important;
+}
+
+/* -------------------------------------------------------------------------- */
+/* NUMBER WIDGET CARDS OVERRIDES                                              */
+/* -------------------------------------------------------------------------- */
+
+.number-widget-box {
+    display: flex !important;
+    flex-direction: column !important;
+    padding: 24px !important;
+    position: relative !important;
+    border-radius: var(--radius-lg) !important;
+    overflow: hidden !important;
+    min-height: 150px !important;
+    transition: var(--transition-fast) !important;
+    border: 1px solid rgba(0, 0, 0, 0.05) !important;
+}
+
+/* Allow absolute positioning of control without breaking flex flow */
+.number-widget-box .widget-head,
+.number-widget-box .widget-body,
+.number-widget-box .widget-content,
+.number-widget-box .widget-label {
+    display: contents !important;
+}
+
+.number-widget-box .widget-control {
+    position: absolute !important;
+    top: 24px !important;
+    right: 24px !important;
+    z-index: 10 !important;
+}
+
+/* Fix dropdown menu inside control */
+.number-widget-box .widget-control .dropdown-menu {
+    right: 0 !important;
+    left: auto !important;
+    top: 100% !important;
+}
+
+/* Custom decorative icon area via pseudo-element */
+.number-widget-box::after {
+    content: '' !important;
+    display: block !important;
+    width: 48px !important;
+    height: 48px !important;
+    border-radius: 50% !important;
+    margin-bottom: 16px !important;
+    order: 1 !important;
+    background-size: 24px 24px !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    z-index: 2 !important;
+}
+
+/* Big Number gets order 2 */
+.number-widget-box .number {
+    order: 2 !important;
+    font-size: 32px !important;
+    font-weight: 700 !important;
+    line-height: 1.2 !important;
+    margin-bottom: 4px !important;
+    color: var(--text-primary) !important;
+    z-index: 2 !important;
+}
+
+/* Title goes below Number */
+.number-widget-box .widget-title {
+    order: 3 !important;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    text-transform: capitalize !important;
+    color: var(--text-secondary) !important;
+    z-index: 2 !important;
+}
+
+/* Stats underneath */
+.number-widget-box .card-stats {
+    order: 4 !important;
+    font-size: 12px !important;
+    opacity: 0.8 !important;
+    margin-top: 6px !important;
+    z-index: 2 !important;
+}
+
+/* Hover lift effect */
+.number-widget-box:hover {
+    transform: translateY(-4px) !important;
+    box-shadow: var(--hover-shadow) !important;
+}
+
+/* --- THEME VARIATIONS --- */
+
+/* Variation 1: Pristine White */
+.number-widget-box[data-color-index="0"] {
+    background-color: #ffffff !important;
+}
+
+.number-widget-box[data-color-index="0"] .number {
+    color: #111827 !important;
+}
+
+.number-widget-box[data-color-index="0"]::after {
+    background-color: var(--primary-color) !important;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='23 6 13.5 15.5 8.5 10.5 1 18'%3E%3C/polyline%3E%3Cpolyline points='17 6 23 6 23 12'%3E%3C/polyline%3E%3C/svg%3E") !important;
+}
+
+.number-widget-box[data-color-index="0"]::before {
+    content: '' !important;
+    position: absolute !important;
+    top: -20px !important;
+    right: -20px !important;
+    width: 100px !important;
+    height: 100px !important;
+    border-radius: 50% !important;
+    background-color: #f4f7f8 !important;
+    z-index: 1 !important;
+}
+
+.number-widget-box[data-color-index="0"] .widget-control svg,
+.number-widget-box[data-color-index="0"] .widget-title span.ellipsis {
+    color: var(--primary-color) !important;
+    fill: var(--primary-color) !important;
+    stroke: var(--primary-color) !important;
+}
+
+/* Variation 2: Green Chart Gradient */
+.number-widget-box[data-color-index="1"] {
+    background: linear-gradient(135deg, #10b981 0%, #73c76b 60%, #d4dda0 100%) !important;
+    border: 0px !important;
+}
+
+.number-widget-box[data-color-index="1"] .widget-title,
+.number-widget-box[data-color-index="1"] .card-stats {
+    color: rgba(255, 255, 255, 0.9) !important;
+}
+
+.number-widget-box[data-color-index="1"] .number {
+    color: #ffffff !important;
+}
+
+.number-widget-box[data-color-index="1"] .widget-control svg,
+.number-widget-box[data-color-index="1"] .widget-title span.ellipsis {
+    color: #ffffff !important;
+    fill: #ffffff !important;
+    stroke: #ffffff !important;
+}
+
+.number-widget-box[data-color-index="1"]::after {
+    background-color: rgba(255, 255, 255, 0.25) !important;
+    /* Bar chart / trending icon using white */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 3v18h18'/%3E%3Cpath d='M18.7 8l-5.1 5.2-2.8-2.7L7 14.3'/%3E%3C/svg%3E") !important;
+}
+
+.number-widget-box[data-color-index="1"]::before {
+    content: '' !important;
+    position: absolute !important;
+    bottom: -10px !important;
+    right: -10px !important;
+    width: 140px !important;
+    height: 140px !important;
+    border-radius: 50% !important;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 0%, transparent 60%) !important;
+    z-index: 1 !important;
+}
+
+
+/* Variation 3: Linear Gradient Light/Dark Teal */
+.number-widget-box[data-color-index="2"] {
+    background: linear-gradient(135deg, #10b981 0%, #0d6b59 100%) !important;
+}
+
+.number-widget-box[data-color-index="2"] .widget-title,
+.number-widget-box[data-color-index="2"] .card-stats {
+    color: rgba(255, 255, 255, 0.9) !important;
+}
+
+.number-widget-box[data-color-index="2"] .number {
+    color: #ffffff !important;
+}
+
+.number-widget-box[data-color-index="2"] .widget-control svg,
+.number-widget-box[data-color-index="2"] .widget-title span.ellipsis {
+    color: #ffffff !important;
+    fill: #ffffff !important;
+    stroke: #ffffff !important;
+}
+
+.number-widget-box[data-color-index="2"]::after {
+    background-color: rgba(255, 255, 255, 0.2) !important;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='22 12 18 12 15 21 9 3 6 12 2 12'%3E%3C/polyline%3E%3C/svg%3E") !important;
+}
+
+.number-widget-box[data-color-index="2"]::before {
+    content: '' !important;
+    position: absolute !important;
+    top: 50% !important;
+    right: -30px !important;
+    width: 150px !important;
+    height: 150px !important;
+    border-radius: 50% !important;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.15) 0%, transparent 60%) !important;
+    transform: translateY(-50%) !important;
+    z-index: 1 !important;
+}
+
+/* Variation 4: Solid Dark Teal */
+.number-widget-box[data-color-index="3"] {
+    background-color: var(--primary-color) !important;
+}
+
+.number-widget-box[data-color-index="3"] .widget-title,
+.number-widget-box[data-color-index="3"] .card-stats {
+    color: rgba(255, 255, 255, 0.9) !important;
+}
+
+.number-widget-box[data-color-index="3"] .number {
+    color: #ffffff !important;
+}
+
+.number-widget-box[data-color-index="3"] .widget-control svg,
+.number-widget-box[data-color-index="3"] .widget-title span.ellipsis {
+    color: #ffffff !important;
+    fill: #ffffff !important;
+    stroke: #ffffff !important;
+}
+
+.number-widget-box[data-color-index="3"]::after {
+    background-color: #ffffff !important;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230f626a' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='4' width='18' height='18' rx='2' ry='2'%3E%3C/rect%3E%3Cline x1='16' y1='2' x2='16' y2='6'%3E%3C/line%3E%3Cline x1='8' y1='2' x2='8' y2='6'%3E%3C/line%3E%3Cline x1='3' y1='10' x2='21' y2='10'%3E%3C/line%3E%3Cpath d='M9 16l2 2 4-4'/%3E%3C/svg%3E") !important;
+}
+
+.number-widget-box[data-color-index="3"]::before {
+    content: '' !important;
+    position: absolute !important;
+    right: -20px !important;
+    bottom: -20px !important;
+    width: 140px !important;
+    height: 140px !important;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='4' width='18' height='18' rx='2' ry='2'%3E%3C/rect%3E%3Cline x1='16' y1='2' x2='16' y2='6'%3E%3C/line%3E%3Cline x1='8' y1='2' x2='8' y2='6'%3E%3C/line%3E%3Cline x1='3' y1='10' x2='21' y2='10'%3E%3C/line%3E%3Cpath d='M9 16l2 2 4-4'/%3E%3C/svg%3E") !important;
+    background-size: cover !important;
+    background-repeat: no-repeat !important;
+    opacity: 0.1 !important;
+    z-index: 1 !important;
+}
+
+/* --- FIX FRAPPE FILE UPLOADER CHECKBOXES --- */
+/* Override KI Admin's overly broad `.file-uploader label` selector */
+.file-uploader label.frappe-checkbox {
+    width: auto !important;
+    height: auto !important;
+    font-size: var(--text-sm) !important;
+    display: inline-flex !important;
+    flex-direction: row !important;
+    justify-content: flex-start !important;
+    align-items: center !important;
+    border: none !important;
+    background-color: transparent !important;
+    padding-top: 0.25rem !important;
+    gap: 0.5rem;
+    cursor: pointer;
+}
+
+/* Style the native checkbox to match the theme color */
+.file-uploader label.frappe-checkbox input[type="checkbox"] {
+    accent-color: var(--primary-color) !important;
+    width: 16px !important;
+    height: 16px !important;
+    cursor: pointer;
+    margin: 0 !important;
+}
+
+/* --- FIX FRAPPE HEADER BUTTON SIZES --- */
+/* Ensure text buttons and icon buttons in the header have the exact same height */
+.page-head .btn-sm,
+.page-head .btn {
+    height: 32px !important;
+    justify-content: center !important;
+}

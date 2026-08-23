@@ -1,0 +1,606 @@
+/* ==========================================================================
+   Afintrix desk sidebar (Frappe v16)
+   Layout follows the approved "Employee Detail" mockup, colours follow the
+   Afintrix brand (royal blue + gold) instead of the mockup green.
+   ========================================================================== */
+
+:root {
+	--afx-primary: #1e40c8;
+	--afx-primary-hover: #172fa0;
+	--afx-primary-soft: #eef1fd;
+	--afx-gold: #c8992e;
+
+	--afx-sidebar-w: 288px;
+	--afx-sidebar-w-collapsed: 84px;
+
+	--afx-bg: #ffffff;
+	--afx-border: #ebedf3;
+	--afx-label: #48505f;
+	--afx-label-strong: #10141c;
+	--afx-muted: #8d96a8;
+	--afx-hover: #f5f7fa;
+	--afx-active: #f1f3f8;
+	--afx-tree: #e4e8ef;
+	--afx-danger: #e5484d;
+	--afx-radius: 12px;
+}
+
+[data-theme="dark"] {
+	--afx-primary: #3f5ce0;
+	--afx-primary-hover: #4b68ea;
+	--afx-primary-soft: #1c2340;
+
+	--afx-bg: #16181d;
+	--afx-border: #262a33;
+	--afx-label: #b9c1cf;
+	--afx-label-strong: #f2f4f8;
+	--afx-muted: #7b8494;
+	--afx-hover: #1d2027;
+	--afx-active: #22262f;
+	--afx-tree: #2b303a;
+}
+
+/* Native v16 sidebar stays in the DOM (its JS still powers search and
+   notifications) but is taken out of the layout. */
+body.afx-sidebar-on > .body-sidebar-container {
+	width: 0 !important;
+	min-width: 0 !important;
+	overflow: hidden !important;
+	visibility: hidden;
+	pointer-events: none;
+}
+
+body.afx-sidebar-on .body-sidebar-container .dropdown-notifications:not(.hidden) {
+	visibility: visible;
+	pointer-events: auto;
+	position: fixed;
+	top: 72px;
+	left: calc(var(--afx-sidebar-w) + 12px);
+	width: 380px;
+	max-height: calc(100vh - 96px);
+	overflow: hidden auto;
+	background: var(--afx-bg);
+	border: 1px solid var(--afx-border);
+	border-radius: 14px;
+	box-shadow: 0 18px 40px -18px rgba(12, 16, 24, 0.35);
+	z-index: 1030;
+}
+
+body.afx-sidebar-on.afx-collapsed .body-sidebar-container .dropdown-notifications:not(.hidden) {
+	left: calc(var(--afx-sidebar-w-collapsed) + 12px);
+}
+
+/* --------------------------------------------------------------- shell -- */
+
+.afx-sidebar {
+	display: flex;
+	flex-direction: column;
+	flex: 0 0 var(--afx-sidebar-w);
+	width: var(--afx-sidebar-w);
+	height: 100vh;
+	position: sticky;
+	top: 0;
+	padding: 20px 16px 16px;
+	background: var(--afx-bg);
+	border-right: 1px solid var(--afx-border);
+	font-size: 14px;
+	z-index: 1020;
+	transition: flex-basis 0.18s ease, width 0.18s ease, padding 0.18s ease;
+}
+
+.afx-sidebar * {
+	box-sizing: border-box;
+}
+
+/* ---------------------------------------------------------------- head -- */
+
+.afx-head {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	margin-bottom: 18px;
+	min-height: 40px;
+}
+
+.afx-brand {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	flex: 1 1 auto;
+	min-width: 0;
+	text-decoration: none !important;
+	color: var(--afx-label-strong);
+}
+
+.afx-brand-mark {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 34px;
+	height: 34px;
+	flex: 0 0 34px;
+	border-radius: 10px;
+	background: var(--afx-primary-soft);
+	overflow: hidden;
+}
+
+.afx-brand-mark img {
+	max-width: 26px;
+	max-height: 26px;
+	object-fit: contain;
+}
+
+.afx-brand-name {
+	font-size: 18px;
+	font-weight: 700;
+	letter-spacing: -0.2px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.afx-collapse-btn {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 30px;
+	height: 30px;
+	flex: 0 0 30px;
+	border: none;
+	border-radius: 8px;
+	background: transparent;
+	color: var(--afx-muted);
+	cursor: pointer;
+}
+
+.afx-collapse-btn:hover {
+	background: var(--afx-hover);
+	color: var(--afx-label-strong);
+}
+
+.afx-chevrons {
+	display: flex;
+	gap: 1px;
+}
+
+.afx-chevrons span {
+	width: 6px;
+	height: 6px;
+	border-left: 1.6px solid currentColor;
+	border-bottom: 1.6px solid currentColor;
+	transform: rotate(45deg);
+}
+
+/* ------------------------------------------------------- primary action -- */
+
+.afx-primary {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 10px;
+	height: 54px;
+	padding: 0 18px;
+	margin-bottom: 18px;
+	border-radius: 14px;
+	background: var(--afx-primary);
+	color: #fff !important;
+	font-size: 15px;
+	font-weight: 600;
+	text-decoration: none !important;
+	box-shadow: 0 8px 18px -10px rgba(30, 64, 200, 0.85);
+	transition: background 0.15s ease;
+}
+
+.afx-primary:hover {
+	background: var(--afx-primary-hover);
+}
+
+.afx-primary-icon {
+	display: flex;
+	align-items: center;
+	font-size: 18px;
+	opacity: 0.9;
+}
+
+/* --------------------------------------------------------------- links -- */
+
+.afx-link {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	width: 100%;
+	height: 42px;
+	padding: 0 12px;
+	border: none;
+	border-radius: 10px;
+	background: transparent;
+	color: var(--afx-label);
+	font-size: 14.5px;
+	font-weight: 500;
+	text-align: left;
+	text-decoration: none !important;
+	cursor: pointer;
+	transition: background 0.12s ease, color 0.12s ease;
+}
+
+.afx-link:hover {
+	background: var(--afx-hover);
+	color: var(--afx-label-strong);
+}
+
+.afx-link.afx-active {
+	background: var(--afx-active);
+	color: var(--afx-label-strong);
+	font-weight: 600;
+}
+
+.afx-icon {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 20px;
+	flex: 0 0 20px;
+	font-size: 18px;
+	color: var(--afx-muted);
+}
+
+.afx-link:hover .afx-icon,
+.afx-link.afx-active .afx-icon {
+	color: var(--afx-primary);
+}
+
+.afx-label {
+	flex: 1 1 auto;
+	min-width: 0;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.afx-kbd {
+	font-size: 11px;
+	color: var(--afx-muted);
+	letter-spacing: 0.3px;
+}
+
+.afx-badge {
+	min-width: 20px;
+	height: 20px;
+	padding: 0 6px;
+	border-radius: 999px;
+	background: var(--afx-danger);
+	color: #fff;
+	font-size: 11px;
+	font-weight: 600;
+	line-height: 20px;
+	text-align: center;
+}
+
+.afx-badge.hidden {
+	display: none;
+}
+
+/* --------------------------------------------------------------- quick -- */
+
+.afx-quick {
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+	padding-bottom: 12px;
+	margin-bottom: 6px;
+	border-bottom: 1px solid var(--afx-border);
+}
+
+/* ----------------------------------------------------------------- nav -- */
+
+.afx-nav-scroll {
+	flex: 1 1 auto;
+	min-height: 0;
+	overflow-y: auto;
+	overflow-x: hidden;
+	margin: 0 -4px;
+	padding: 0 4px;
+	scrollbar-width: thin;
+}
+
+.afx-nav-scroll::-webkit-scrollbar {
+	width: 6px;
+}
+
+.afx-nav-scroll::-webkit-scrollbar-thumb {
+	border-radius: 3px;
+	background: var(--afx-tree);
+}
+
+.afx-nav {
+	list-style: none;
+	margin: 0;
+	padding: 4px 0 12px;
+}
+
+.afx-item {
+	margin-bottom: 2px;
+}
+
+.afx-caret {
+	display: flex;
+	align-items: center;
+	font-size: 16px;
+	color: var(--afx-muted);
+	transition: transform 0.18s ease;
+}
+
+.afx-group-toggle[aria-expanded="false"] .afx-caret {
+	transform: rotate(-90deg);
+}
+
+.afx-subnav {
+	position: relative;
+	list-style: none;
+	margin: 2px 0 6px;
+	padding: 0 0 0 32px;
+	overflow: hidden;
+}
+
+.afx-subnav::before {
+	content: "";
+	position: absolute;
+	left: 21px;
+	top: 4px;
+	bottom: 18px;
+	width: 1px;
+	background: var(--afx-tree);
+}
+
+.afx-group-toggle[aria-expanded="false"] + .afx-subnav {
+	display: none;
+}
+
+.afx-subitem {
+	position: relative;
+}
+
+.afx-subitem::before {
+	content: "";
+	position: absolute;
+	left: -11px;
+	top: 50%;
+	width: 11px;
+	height: 1px;
+	background: var(--afx-tree);
+}
+
+.afx-sublink {
+	display: block;
+	padding: 10px 12px;
+	border-radius: 10px;
+	color: var(--afx-label);
+	font-size: 14.5px;
+	text-decoration: none !important;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.afx-sublink:hover {
+	background: var(--afx-hover);
+	color: var(--afx-label-strong);
+}
+
+.afx-sublink.afx-active {
+	background: var(--afx-active);
+	color: var(--afx-label-strong);
+	font-weight: 600;
+}
+
+/* ---------------------------------------------------------------- foot -- */
+
+.afx-foot {
+	flex: 0 0 auto;
+	padding-top: 10px;
+	border-top: 1px solid var(--afx-border);
+}
+
+.afx-user {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	width: 100%;
+	margin-top: 6px;
+	padding: 8px 10px;
+	border: none;
+	border-radius: 12px;
+	background: transparent;
+	cursor: pointer;
+	text-align: left;
+}
+
+.afx-user:hover {
+	background: var(--afx-hover);
+}
+
+.afx-avatar {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 32px;
+	height: 32px;
+	flex: 0 0 32px;
+	border-radius: 50%;
+	background: var(--afx-primary-soft);
+	color: var(--afx-primary);
+	font-size: 12px;
+	font-weight: 700;
+	text-transform: uppercase;
+}
+
+.afx-user-meta {
+	display: flex;
+	flex-direction: column;
+	min-width: 0;
+	line-height: 1.25;
+}
+
+.afx-user-name {
+	font-size: 13.5px;
+	font-weight: 600;
+	color: var(--afx-label-strong);
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.afx-user-mail {
+	font-size: 11.5px;
+	color: var(--afx-muted);
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.afx-theme-switch {
+	display: flex;
+	gap: 4px;
+	margin-top: 10px;
+	padding: 4px;
+	border-radius: 999px;
+	background: var(--afx-active);
+}
+
+.afx-theme-btn {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 6px;
+	flex: 1 1 50%;
+	height: 34px;
+	border: none;
+	border-radius: 999px;
+	background: transparent;
+	color: var(--afx-muted);
+	font-size: 13px;
+	font-weight: 500;
+	cursor: pointer;
+}
+
+.afx-theme-btn.afx-active {
+	background: var(--afx-bg);
+	color: var(--afx-label-strong);
+	font-weight: 600;
+	box-shadow: 0 1px 3px rgba(16, 20, 28, 0.12);
+}
+
+/* ----------------------------------------------------------- collapsed -- */
+
+body.afx-collapsed .afx-sidebar {
+	flex-basis: var(--afx-sidebar-w-collapsed);
+	width: var(--afx-sidebar-w-collapsed);
+	padding-left: 12px;
+	padding-right: 12px;
+}
+
+body.afx-collapsed .afx-brand-name,
+body.afx-collapsed .afx-label,
+body.afx-collapsed .afx-kbd,
+body.afx-collapsed .afx-caret,
+body.afx-collapsed .afx-primary-label,
+body.afx-collapsed .afx-user-meta,
+body.afx-collapsed .afx-theme-btn span,
+body.afx-collapsed .afx-subnav {
+	display: none;
+}
+
+body.afx-collapsed .afx-head {
+	flex-direction: column;
+	gap: 10px;
+}
+
+body.afx-collapsed .afx-brand,
+body.afx-collapsed .afx-primary,
+body.afx-collapsed .afx-link,
+body.afx-collapsed .afx-user {
+	justify-content: center;
+}
+
+body.afx-collapsed .afx-primary {
+	padding: 0;
+}
+
+body.afx-collapsed .afx-chevrons span {
+	transform: rotate(-135deg);
+}
+
+body.afx-collapsed .afx-theme-switch {
+	padding: 3px;
+}
+
+body.afx-collapsed .afx-theme-btn {
+	height: 30px;
+}
+
+/* -------------------------------------------------------------- mobile -- */
+
+.afx-mobile-toggle {
+	display: none;
+	position: fixed;
+	top: 14px;
+	left: 14px;
+	z-index: 1018;
+	width: 36px;
+	height: 36px;
+	padding: 9px 8px;
+	border: 1px solid var(--afx-border);
+	border-radius: 10px;
+	background: var(--afx-bg);
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.afx-mobile-toggle span {
+	display: block;
+	height: 2px;
+	border-radius: 2px;
+	background: var(--afx-label);
+}
+
+.afx-scrim {
+	display: none;
+	position: fixed;
+	inset: 0;
+	background: rgba(12, 16, 24, 0.45);
+	z-index: 1019;
+}
+
+@media (max-width: 991px) {
+	.afx-mobile-toggle {
+		display: flex;
+	}
+
+	body.afx-sidebar-open .afx-mobile-toggle {
+		display: none;
+	}
+
+	.afx-sidebar {
+		position: fixed;
+		top: 0;
+		left: 0;
+		/* ki_style.css pulls narrow-screen navs off-canvas with a negative margin */
+		margin: 0;
+		transform: translateX(-100%);
+		transition: transform 0.2s ease;
+		box-shadow: 0 0 40px rgba(12, 16, 24, 0.18);
+	}
+
+	body.afx-sidebar-open .afx-sidebar {
+		transform: translateX(0);
+	}
+
+	body.afx-sidebar-open .afx-scrim {
+		display: block;
+	}
+
+	body.afx-collapsed .afx-sidebar {
+		flex-basis: var(--afx-sidebar-w);
+		width: var(--afx-sidebar-w);
+	}
+}

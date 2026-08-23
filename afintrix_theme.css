@@ -1,0 +1,10 @@
+.checkbox {
+  margin-bottom: 10px;
+}
+  
+.radio {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+/* Other CSS styles */

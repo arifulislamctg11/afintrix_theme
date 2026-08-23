@@ -1,0 +1,288 @@
+{% extends "templates/web.html" %}
+
+{% block title %} {{ _("Portal Dashboard") }} {% endblock %}
+
+{% block page_content %}
+<div class="portal-dashboard-container p-0 m-0">
+    <div class="dashboard-header p-0 m-0">
+        <h2 class="font-weight-bold" style="font-size: 28px; letter-spacing: -0.5px; margin-top: 0 !important;">{{ _("Welcome back") }}, {{ user_full_name }}!</h2>
+        <p class="text-muted" style="font-size: 14px; margin-top: -5px;">{{ _("Here's a quick overview of your account activity.") }}</p>
+    </div>
+
+    <!-- Summary Widgets (Number Cards) -->
+    <div class="row mb-5">
+        <div class="col-md-3 mb-4">
+            <div class="number-widget-box color-0">
+                <div class="widget-content">
+                    <div class="widget-label">{{ _("Total Orders") }}</div>
+                    <div class="widget-value">{{ stats.orders }}</div>
+                    <div class="widget-subtitle">
+                        <a href="/orders" class="text-white opacity-75 small">{{ _("View all orders") }} →</a>
+                    </div>
+                </div>
+                <div class="widget-icon">
+                    <iconify-icon icon="line-md:document-list" width="48"></iconify-icon>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 mb-4">
+            <div class="number-widget-box color-1">
+                <div class="widget-content">
+                    <div class="widget-label">{{ _("Invoices") }}</div>
+                    <div class="widget-value">{{ stats.invoices }}</div>
+                    <div class="widget-subtitle">
+                        <a href="/invoices" class="text-white opacity-75 small">{{ _("View history") }} →</a>
+                    </div>
+                </div>
+                <div class="widget-icon">
+                    <iconify-icon icon="line-md:receipt" width="48"></iconify-icon>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 mb-4">
+            <div class="number-widget-box color-2">
+                <div class="widget-content">
+                    <div class="widget-label">{{ _("Outstanding") }}</div>
+                    <div class="widget-value">{{ frappe.format(stats.outstanding, "Currency") }}</div>
+                    <div class="widget-subtitle text-white opacity-75 small">
+                        {{ _("Pending payment") }}
+                    </div>
+                </div>
+                <div class="widget-icon">
+                    <iconify-icon icon="line-md:coin" width="48"></iconify-icon>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 mb-4">
+            <div class="number-widget-box color-3">
+                <div class="widget-content">
+                    <div class="widget-label">{{ _("Open Issues") }}</div>
+                    <div class="widget-value">{{ stats.issues }}</div>
+                    <div class="widget-subtitle">
+                        <a href="/issues" class="text-white opacity-75 small">{{ _("View support") }} →</a>
+                    </div>
+                </div>
+                <div class="widget-icon">
+                    <iconify-icon icon="line-md:alert-circle" width="48"></iconify-icon>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Recent Tables -->
+    <div class="row">
+        <!-- Recent Orders -->
+        <div class="col-lg-6 mb-4">
+            <div class="frappe-card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <span>{{ _("Recent Orders") }}</span>
+                    <a href="/orders" class="small font-weight-bold">{{ _("See All") }}</a>
+                </div>
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <table class="table table-hover mb-0">
+                            <thead>
+                                <tr>
+                                    <th>{{ _("ID") }}</th>
+                                    <th>{{ _("Date") }}</th>
+                                    <th>{{ _("Amount") }}</th>
+                                    <th>{{ _("Status") }}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% if recent_orders %}
+                                    {% for order in recent_orders %}
+                                    <tr>
+                                        <td><a href="/orders/{{ order.name }}">{{ order.name }}</a></td>
+                                        <td>{{ frappe.format(order.transaction_date, "Date") }}</td>
+                                        <td>{{ frappe.format(order.grand_total, "Currency") }}</td>
+                                        <td>
+                                            <span class="indicator-pill {% if order.status == 'Completed' %}green{% elif order.status == 'Draft' %}orange{% else %}blue{% endif %} ml-0">
+                                                {{ order.status }}
+                                            </span>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                {% else %}
+                                    <tr>
+                                        <td colspan="4" class="text-center p-4 text-muted small">
+                                            {{ _("No recent orders found.") }}
+                                        </td>
+                                    </tr>
+                                {% endif %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recent Invoices -->
+        <div class="col-lg-6 mb-4">
+            <div class="frappe-card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <span>{{ _("Recent Invoices") }}</span>
+                    <a href="/invoices" class="small font-weight-bold">{{ _("See All") }}</a>
+                </div>
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <table class="table table-hover mb-0">
+                            <thead>
+                                <tr>
+                                    <th>{{ _("ID") }}</th>
+                                    <th>{{ _("Date") }}</th>
+                                    <th>{{ _("Amount") }}</th>
+                                    <th>{{ _("Outstanding") }}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% if recent_invoices %}
+                                    {% for inv in recent_invoices %}
+                                    <tr>
+                                        <td><a href="/invoices/{{ inv.name }}">{{ inv.name }}</a></td>
+                                        <td>{{ frappe.format(inv.posting_date, "Date") }}</td>
+                                        <td>{{ frappe.format(inv.grand_total, "Currency") }}</td>
+                                        <td>{{ frappe.format(inv.outstanding_amount, "Currency") }}</td>
+                                    </tr>
+                                    {% endfor %}
+                                {% else %}
+                                    <tr>
+                                        <td colspan="4" class="text-center p-4 text-muted small">
+                                            {{ _("No recent invoices found.") }}
+                                        </td>
+                                    </tr>
+                                {% endif %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Shortcuts -->
+    <div class="row mt-4">
+        <div class="col-12">
+            <h5 class="mb-3 font-weight-bold">{{ _("Quick Links") }}</h5>
+            <div class="d-flex flex-wrap gap-12">
+                <a href="/update-profile" class="btn btn-default mb-2 mr-2">
+                    <iconify-icon icon="line-md:account" class="mr-1"></iconify-icon> {{ _("Update Profile") }}
+                </a>
+                <a href="/addresses" class="btn btn-default mb-2 mr-2">
+                    <iconify-icon icon="line-md:map-pin" class="mr-1"></iconify-icon> {{ _("Manage Addresses") }}
+                </a>
+                <a href="/issues/new" class="btn btn-default mb-2 mr-2 text-primary">
+                    <iconify-icon icon="line-md:chat" class="mr-1"></iconify-icon> {{ _("Get Help / Support") }}
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+/* Dashboard Specific Styles */
+.gap-12 { gap: 12px; }
+
+/* Re-use the number widget styles from the desk in portal context */
+/* We need to ensure the portal CSS includes these or we re-define them here */
+
+.number-widget-box {
+    position: relative;
+    padding: 24px;
+    border-radius: 12px;
+    overflow: hidden;
+    min-height: 140px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid #ebedf0;
+}
+
+.number-widget-box:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px rgba(15, 98, 106, 0.08);
+}
+
+/* Card 0 - Incoming Green Style */
+.number-widget-box.color-0 { 
+    background: #eefcf3 !important; 
+    border-left: 5px solid #12715B !important; 
+}
+.number-widget-box.color-0 .widget-label, 
+.number-widget-box.color-0 .widget-value { color: #12715B; }
+.number-widget-box.color-0 .widget-subtitle a { color: #12715B !important; opacity: 0.8; }
+.number-widget-box.color-0 iconify-icon { color: #12715B; opacity: 0.2; }
+
+/* Card 1 - Outgoing Teal Style */
+.number-widget-box.color-1 { 
+    background: #e3f4f6 !important; 
+    border-left: 5px solid #0f626a !important; 
+}
+.number-widget-box.color-1 .widget-label, 
+.number-widget-box.color-1 .widget-value { color: #0f626a; }
+.number-widget-box.color-1 .widget-subtitle a { color: #0f626a !important; opacity: 0.8; }
+.number-widget-box.color-1 iconify-icon { color: #0f626a; opacity: 0.2; }
+
+/* Card 2 - Gray Style */
+.number-widget-box.color-2 { 
+    background: #f8f9fb !important; 
+    border-left: 5px solid #6c757d !important; 
+}
+.number-widget-box.color-2 .widget-label, 
+.number-widget-box.color-2 .widget-value { color: #343a40; }
+.number-widget-box.color-2 .widget-subtitle { color: #6c757d; }
+.number-widget-box.color-2 iconify-icon { color: #6c757d; opacity: 0.2; }
+
+/* Card 3 - Lime Style */
+.number-widget-box.color-3 { 
+    background: #f0f7e1 !important; 
+    border-left: 5px solid #84cc16 !important; 
+}
+.number-widget-box.color-3 .widget-label, 
+.number-widget-box.color-3 .widget-value { color: #3f6212; }
+.number-widget-box.color-3 .widget-subtitle a { color: #3f6212 !important; opacity: 0.8; }
+.number-widget-box.color-3 iconify-icon { color: #84cc16; opacity: 0.2; }
+
+.widget-content { z-index: 2; position: relative; }
+.widget-label { font-size: 14px; font-weight: 600; opacity: 0.9; margin-bottom: 4px; }
+.widget-value { font-size: 28px; font-weight: 700; margin-bottom: 8px; }
+.widget-icon {
+    position: absolute;
+    right: -15px;
+    bottom: -15px;
+    z-index: 1;
+    transform: rotate(-15deg);
+}
+
+.widget-icon iconify-icon {
+    width: 80px !important;
+    height: 80px !important;
+}
+
+.number-widget-box.color-0 iconify-icon { color: #12715B; opacity: 0.15; }
+.number-widget-box.color-1 iconify-icon { color: #0f626a; opacity: 0.15; }
+.number-widget-box.color-2 iconify-icon { color: #6c757d; opacity: 0.15; }
+.number-widget-box.color-3 iconify-icon { color: #84cc16; opacity: 0.15; }
+
+
+/* Background Wave Animation Effect (similar to desk) */
+.number-widget-box::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -20%;
+    width: 200px;
+    height: 200px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 40%;
+    animation: wave 10s infinite linear;
+}
+
+@keyframes wave {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+</style>
+{% endblock %}

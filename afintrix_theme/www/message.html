@@ -1,0 +1,187 @@
+{% extends "templates/web.html" %}
+
+{% block title %} {{ title or _("Message") }} {% endblock %}
+
+{% block head_include %}
+<style>
+    /* Reset Frappe Base Styles */
+    html,
+    body {
+        margin: 0;
+        padding: 0;
+        min-height: 100vh;
+        overflow-x: hidden;
+    }
+
+    body {
+        background: #e0f2f1;
+        background: radial-gradient(circle at top left, #e0f2f1 0%, #b2dfdb 100%);
+        font-family: var(--font-family, 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        padding: 20px;
+    }
+
+    /* Wavy layered SVG background effect */
+    .bg-waves {
+        position: absolute;
+        bottom: -10px;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 0;
+        pointer-events: none;
+        background-image:
+            url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%2380cbc4' fill-opacity='0.4' d='M0,160L48,176C96,192,192,224,288,208C384,192,480,128,576,128C672,128,768,192,864,224C960,256,1056,256,1152,224C1248,192,1344,128,1392,96L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E"),
+            url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%234db6ac' fill-opacity='0.5' d='M0,288L48,272C96,256,192,224,288,197.3C384,171,480,149,576,165.3C672,181,768,235,864,250.7C960,267,1056,245,1152,250.7C1248,256,1344,288,1392,304L1440,320L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: bottom;
+        background-size: cover;
+    }
+
+    /* Polka dots top left */
+    .bg-dots {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        width: 200px;
+        height: 200px;
+        background-image: radial-gradient(rgba(18, 113, 91, 0.15) 2px, transparent 2px);
+        background-size: 20px 20px;
+        z-index: 0;
+    }
+
+    /* Hide native elements */
+    .page-card {
+        display: none !important;
+    }
+
+    .navbar,
+    header,
+    footer {
+        display: none !important;
+    }
+
+    /* The modern card */
+    .auth-wrapper {
+        position: relative;
+        z-index: 10;
+        width: 100%;
+        max-width: 420px;
+        margin: auto;
+    }
+
+    .auth-card {
+        background: #ffffff;
+        border-radius: 12px;
+        padding: 3rem 2rem 2rem 2rem;
+        box-shadow: 0 10px 40px rgba(18, 113, 91, 0.1);
+        position: relative;
+        text-align: center;
+    }
+
+    /* Floating Logo */
+    .auth-logo-float {
+        position: absolute;
+        top: -30px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: #12715B;
+        border-radius: 50%;
+        width: 65px;
+        height: 65px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: 800;
+        font-size: 26px;
+        box-shadow: 0 4px 15px rgba(18, 113, 91, 0.3);
+        border: 5px solid white;
+        letter-spacing: -1px;
+    }
+
+    .auth-card h3 {
+        color: #0a1f1b;
+        font-weight: 700;
+        margin-bottom: 10px;
+        font-size: 1.5rem;
+    }
+
+    .auth-card p.subtitle {
+        color: #6c757d;
+        font-size: 0.95rem;
+        margin-bottom: 25px;
+        line-height: 1.4;
+    }
+
+    .auth-card .btn-primary {
+        background-color: #12715B;
+        border-color: #12715B;
+        width: 100%;
+        padding: 12px;
+        border-radius: 6px;
+        color: white;
+        font-weight: 600;
+        border: none;
+        cursor: pointer;
+        transition: all 0.2s;
+        font-size: 0.95rem;
+        text-decoration: none;
+        display: inline-block;
+    }
+
+    .auth-card .btn-primary:hover {
+        background-color: #0f604d;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 10px rgba(15, 96, 77, 0.2);
+    }
+</style>
+{% endblock %}
+
+{% block page_content %}
+<div class="bg-waves"></div>
+<div class="bg-dots"></div>
+
+<div class="auth-wrapper">
+    <div class="auth-card">
+        <!-- Reusing same logo style from login page -->
+        <div class="auth-logo-float">Ki</div>
+
+        <h3>{{ title or _("Message") }}</h3>
+
+        {% block message_body %}
+        {% if message %}
+        <p class="subtitle">{{ message }}</p>
+        {% endif %}
+
+        {% if primary_action %}
+        <div>
+            <a href='{{ primary_action or "/" }}' class='btn-primary'>
+                {{ primary_label or _("Home") }}
+            </a>
+        </div>
+        {% endif %}
+        {% endblock %}
+
+        {% if error_code %}
+        <p class='text-muted text-center small' style='margin-top: 15px; font-size: 0.75rem; color: #adb5bd;'>
+            {{ _("Status: {0}").format(error_code) }}
+        </p>
+        {% endif %}
+    </div>
+</div>
+
+<script>
+    frappe.ready(function () {
+        if (window.location.hash || window.location.href.includes('/app')) {
+            localStorage.setItem('session_last_route', window.location.pathname);
+        }
+        $('.btn-primary').focus();
+    });
+</script>
+{% endblock %}
+
+{% block sidebar %}{% endblock %}
