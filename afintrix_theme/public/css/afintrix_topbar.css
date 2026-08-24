@@ -17,6 +17,14 @@
 	border-bottom: 1px solid var(--afx-border, #ebedf3);
 }
 
+/* The /desk workspace page ships its own navbar (logo, search, bell, avatar).
+   With the Afintrix bar above it that is a second copy of every control, so it
+   is taken out of the layout. Its avatar menu carried Logout, which the
+   Afintrix user menu now provides. */
+body.afx-topbar-on .desktop-navbar {
+	display: none !important;
+}
+
 /* the page head keeps breadcrumbs and page actions on the row below */
 body.afx-topbar-on .page-head {
 	top: 68px;
@@ -174,6 +182,78 @@ body.afx-topbar-on .page-head {
 	width: 100%;
 	height: 100%;
 	object-fit: cover;
+}
+
+
+/* ---------------------------------------------------------- user menu -- */
+
+.afx-topbar-usermenu {
+	position: relative;
+	display: flex;
+}
+
+.afx-topbar-menu {
+	position: absolute;
+	top: calc(100% + 8px);
+	right: 0;
+	min-width: 220px;
+	padding: 6px;
+	border: 1px solid var(--afx-border, #ebedf3);
+	border-radius: 14px;
+	background: var(--afx-bg, #fff);
+	box-shadow: 0 18px 40px -18px rgba(12, 16, 24, 0.35);
+	z-index: 1040;
+}
+
+.afx-topbar-menu.hidden {
+	display: none;
+}
+
+.afx-topbar-menu-head {
+	padding: 8px 10px 10px;
+	border-bottom: 1px solid var(--afx-border, #ebedf3);
+	margin-bottom: 6px;
+}
+
+.afx-topbar-menu-name {
+	display: block;
+	color: var(--afx-label-strong, #10141c);
+	font-size: 13px;
+	font-weight: 600;
+	line-height: 1.3;
+}
+
+.afx-topbar-menu-mail {
+	display: block;
+	color: var(--afx-muted, #8d96a8);
+	font-size: 12px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.afx-topbar-menu-item {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	width: 100%;
+	padding: 9px 10px;
+	border: none;
+	border-radius: 10px;
+	background: transparent;
+	color: var(--afx-label, #48505f);
+	font-size: 13px;
+	text-align: left;
+	text-decoration: none !important;
+	cursor: pointer;
+}
+
+.afx-topbar-menu-item:hover {
+	background: var(--afx-hover, #f5f7fa);
+	color: var(--afx-label-strong, #10141c);
+}
+
+.afx-topbar-menu-item iconify-icon {
+	font-size: 17px;
 }
 
 /* -------------------------------------------------------------- narrow -- */

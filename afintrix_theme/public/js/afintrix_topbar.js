@@ -150,11 +150,12 @@
 		// no use for initials — read the directory entry instead.
 		const info = (frappe.boot && frappe.boot.user_info && frappe.boot.user_info[user]) || {};
 		const full_name = info.fullname || frappe.session.user_fullname || user;
-		const image = info;
-		const avatar = image && image.image
-			? `<img src="${frappe.utils.escape_html(image.image)}" alt="">`
+		const email = (frappe.session && frappe.session.user_email) || user;
+		const avatar = info && info.image
+			? `<img src="${frappe.utils.escape_html(info.image)}" alt="">`
 			: frappe.utils.escape_html(initials(full_name || user));
 
+		const wrap = el("div", "afx-topbar-usermenu");
 		const btn = el(
 			"button",
 			"afx-topbar-user",
@@ -163,11 +164,60 @@
 		);
 		btn.type = "button";
 		btn.title = full_name || user;
-		btn.addEventListener("click", () => {
-			if (frappe.ui.toolbar && frappe.ui.toolbar.route_to_user) frappe.ui.toolbar.route_to_user();
-			else frappe.set_route("user-profile");
+		btn.setAttribute("aria-haspopup", "menu");
+		btn.setAttribute("aria-expanded", "false");
+
+		// The /desk navbar that used to carry Edit Profile and Logout is hidden
+		// (it duplicated this bar), so those two live here. Frappe Support and
+		// About are deliberately left out.
+		const menu = el(
+			"div",
+			"afx-topbar-menu hidden",
+			`<div class="afx-topbar-menu-head">
+				<span class="afx-topbar-menu-name">${frappe.utils.escape_html(full_name || user)}</span>
+				<span class="afx-topbar-menu-mail">${frappe.utils.escape_html(email)}</span>
+			 </div>
+			 <a class="afx-topbar-menu-item" href="/app/user/${encodeURIComponent(user)}">
+				<iconify-icon icon="line-md:person"></iconify-icon>${frappe.utils.escape_html(__("My Profile"))}
+			 </a>
+			 <a class="afx-topbar-menu-item" href="/app/settings">
+				<iconify-icon icon="line-md:cog"></iconify-icon>${frappe.utils.escape_html(__("Settings"))}
+			 </a>
+			 <button type="button" class="afx-topbar-menu-item" data-afx-logout>
+				<iconify-icon icon="line-md:logout"></iconify-icon>${frappe.utils.escape_html(__("Logout"))}
+			 </button>`
+		);
+		menu.setAttribute("role", "menu");
+
+		const close = () => {
+			menu.classList.add("hidden");
+			btn.setAttribute("aria-expanded", "false");
+		};
+
+		btn.addEventListener("click", function (e) {
+			e.stopPropagation();
+			const open = menu.classList.toggle("hidden") === false;
+			btn.setAttribute("aria-expanded", open ? "true" : "false");
 		});
-		return btn;
+
+		menu.addEventListener("click", function (e) {
+			if (e.target.closest("[data-afx-logout]")) {
+				e.preventDefault();
+				frappe.app.logout();
+			}
+			close();
+		});
+
+		document.addEventListener("click", function (e) {
+			if (!wrap.contains(e.target)) close();
+		});
+		document.addEventListener("keydown", function (e) {
+			if (e.key === "Escape") close();
+		});
+
+		wrap.appendChild(btn);
+		wrap.appendChild(menu);
+		return wrap;
 	}
 
 	function initials(name) {

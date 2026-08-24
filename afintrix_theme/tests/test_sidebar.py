@@ -110,7 +110,6 @@ class TestSidebarContext(FrappeTestCase):
 			"primary_action",
 			"app_logo",
 			"brand_title",
-			"help_url",
 			"user_fullname",
 			"user_email",
 			"user_abbr",
@@ -119,18 +118,11 @@ class TestSidebarContext(FrappeTestCase):
 
 		self.assertTrue(context["brand_title"])
 		self.assertTrue(context["app_logo"])
-		self.assertTrue(context["help_url"].startswith("http"))
 
-	def test_help_url_can_be_overridden_from_site_config(self):
-		original = frappe.conf.get("afintrix_help_url")
-		frappe.conf["afintrix_help_url"] = "https://help.afintrix.test/"
-		try:
-			self.assertEqual(get_sidebar_context()["help_url"], "https://help.afintrix.test/")
-		finally:
-			if original is None:
-				frappe.conf.pop("afintrix_help_url", None)
-			else:
-				frappe.conf["afintrix_help_url"] = original
+	def test_sidebar_has_no_external_help_link(self):
+		# The ERPNext docs backlink was dropped; the real Help Center is Phase 3.
+		self.assertNotIn("help_url", get_sidebar_context())
+		self.assertNotIn("Help Center", get_sidebar_html())
 
 	def test_rendered_sidebar_carries_the_shell_markup(self):
 		html = get_sidebar_html()

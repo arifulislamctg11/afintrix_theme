@@ -252,7 +252,6 @@ def boot_session(bootinfo):
 # Afintrix desk sidebar (Frappe v16) — see public/js/afintrix_sidebar.js
 # ---------------------------------------------------------------------------
 
-DEFAULT_HELP_URL = "https://docs.erpnext.com/"
 
 
 def _slugify(value):
@@ -403,7 +402,6 @@ def get_sidebar_context():
         "app_logo": app_logo,
         "brand_title": brand_title,
         "theme_settings": theme_settings,
-        "help_url": frappe.conf.get("afintrix_help_url") or DEFAULT_HELP_URL,
         "user_fullname": full_name,
         "user_email": frappe.db.get_value("User", frappe.session.user, "email")
         or frappe.session.user,

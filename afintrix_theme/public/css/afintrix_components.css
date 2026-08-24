@@ -191,6 +191,43 @@ textarea.form-control,
 	background: var(--afx-bg, #fff);
 }
 
+/* ------------------------------------------------- child table (grid) -- */
+
+/* A child table on a form is the same object as a list view and reads as the
+   same rounded card. Frappe rounds the container at 10px; this lifts it to the
+   list-view radius and rounds the header and last row with it. */
+.form-grid-container,
+.form-grid {
+	border-radius: var(--afx-radius-lg) !important;
+	overflow: hidden;
+}
+
+.form-grid-container {
+	border: 1px solid var(--afx-control-border) !important;
+}
+
+.form-grid .grid-heading-row {
+	background: var(--afx-hover, #f5f7fa);
+	border-bottom: 1px solid var(--afx-control-border);
+	border-radius: var(--afx-radius-lg) var(--afx-radius-lg) 0 0 !important;
+	font-weight: 600;
+	color: var(--afx-label, #48505f);
+}
+
+.form-grid .grid-body {
+	border-radius: 0 0 var(--afx-radius-lg) var(--afx-radius-lg) !important;
+}
+
+.form-grid .grid-body .grid-row:last-child {
+	border-bottom: none;
+}
+
+.grid-footer .btn,
+.grid-buttons .btn,
+.grid-footer-toolbar .btn {
+	border-radius: var(--afx-radius-md);
+}
+
 /* ----------------------------------------------------- cards & widgets -- */
 
 .widget,
