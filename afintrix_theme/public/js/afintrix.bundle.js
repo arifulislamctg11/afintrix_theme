@@ -5,3 +5,4 @@ import "./afintrix_brand.js";
 import "./afintrix_theme.js";
 import "./afintrix_sidebar.js";
 import "./afintrix_topbar.js";
+import "./afintrix_kanban.js";

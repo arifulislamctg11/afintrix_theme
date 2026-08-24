@@ -60,6 +60,9 @@ web_include_js = [
 # include js in doctype views
 doctype_js = {"Workspace" : "public/js/workspace_icon_picker.js"}
 
+# loaded after the doctype's own list view settings, so this extends rather than replaces
+doctype_list_js = {"Employee": "public/js/employee_list.js"}
+
 
 # Website route rewrites
 website_route_rules = [

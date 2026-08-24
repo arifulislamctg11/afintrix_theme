@@ -1,0 +1,362 @@
+/* ==========================================================================
+   Afintrix HR screens — Phase 2
+
+   Frames 19, 20, 23, 36, 45, 53, 61 and 102 of the reference kit. The screens
+   themselves are ERPNext/HRMS; this restyles them. Anything generic (buttons,
+   inputs, list rows, dialogs) already comes from afintrix_components.css —
+   only HR-specific anatomy lives here.
+   ========================================================================== */
+
+/* --------------------------------------------------- status chips (kit) -- */
+
+/* The kit paints a status as a soft tinted pill with strong text, one hue per
+   meaning. Frappe emits .indicator-pill with a colour class, so the mapping
+   stays Frappe's (green = good, orange = waiting, red = blocked) and only the
+   tone changes. Phase 1 set the shape; this sets the palette. */
+.indicator-pill.green,
+.indicator-pill.darkgrey.green {
+	background: #e7f6ee;
+	color: #17724a;
+}
+
+.indicator-pill.orange {
+	background: #fdf3e2;
+	color: #8a5a10;
+}
+
+.indicator-pill.red {
+	background: #fdecec;
+	color: #a3272c;
+}
+
+.indicator-pill.blue {
+	background: #e9edfd;
+	color: #1b2f9e;
+}
+
+.indicator-pill.purple {
+	background: #f0eafc;
+	color: #5b2ea6;
+}
+
+.indicator-pill.yellow {
+	background: #fdf7dd;
+	color: #7a6410;
+}
+
+.indicator-pill.gray,
+.indicator-pill.grey,
+.indicator-pill.darkgrey {
+	background: #eef0f4;
+	color: #545c6b;
+}
+
+[data-theme="dark"] .indicator-pill.green {
+	background: rgba(23, 114, 74, 0.22);
+	color: #6ee7b0;
+}
+
+[data-theme="dark"] .indicator-pill.orange {
+	background: rgba(138, 90, 16, 0.25);
+	color: #f4c76a;
+}
+
+[data-theme="dark"] .indicator-pill.red {
+	background: rgba(163, 39, 44, 0.25);
+	color: #f8a0a3;
+}
+
+[data-theme="dark"] .indicator-pill.blue {
+	background: rgba(27, 47, 158, 0.3);
+	color: #a5b4fc;
+}
+
+[data-theme="dark"] .indicator-pill.purple {
+	background: rgba(91, 46, 166, 0.28);
+	color: #cbb2f5;
+}
+
+[data-theme="dark"] .indicator-pill.yellow {
+	background: rgba(122, 100, 16, 0.28);
+	color: #f0dd8a;
+}
+
+[data-theme="dark"] .indicator-pill.gray,
+[data-theme="dark"] .indicator-pill.grey,
+[data-theme="dark"] .indicator-pill.darkgrey {
+	background: #23262e;
+	color: #aeb6c4;
+}
+
+/* ------------------------------------------- employee list (frames 19, 102) -- */
+
+/* The kit stacks the person's name over their email, with an avatar to the
+   left. afintrix_theme.employee_list adds the second line; this lays it out. */
+.afx-person {
+	display: flex;
+	flex-direction: column;
+	line-height: 1.25;
+	min-width: 0;
+}
+
+.afx-person-name {
+	font-weight: 600;
+	color: var(--afx-label-strong, #10141c);
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.afx-person-mail {
+	font-size: 11px;
+	color: var(--afx-muted, #8d96a8);
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+/* a two-line subject needs the row to breathe */
+.list-row-container .list-row:has(.afx-person) {
+	min-height: 52px;
+}
+
+.list-subject .avatar {
+	margin-right: 10px;
+}
+
+/* ------------------------------------------------- kanban (frame 61) -- */
+
+.kanban .kanban-column {
+	background: var(--afx-hover, #f5f7fa);
+	border: 1px solid var(--afx-control-border);
+	border-radius: var(--afx-radius-lg);
+	padding: 6px 8px 10px;
+	margin-right: 14px;
+}
+
+.kanban .kanban-column-header {
+	padding: 10px 8px 6px;
+}
+
+.kanban .kanban-title {
+	font-weight: 600;
+	color: var(--afx-label-strong, #10141c);
+	font-size: 13px;
+	letter-spacing: 0.01em;
+}
+
+/* the column's dot indicator reads as a count chip in the kit */
+.kanban .kanban-column-title .indicator-pill {
+	padding: 2px 6px;
+}
+
+.kanban .add-card {
+	border-radius: var(--afx-radius-md);
+	color: var(--afx-muted, #8d96a8);
+	font-size: 12px;
+	padding: 7px 10px;
+}
+
+.kanban .add-card:hover {
+	background: var(--afx-bg, #fff);
+	color: var(--afx-primary);
+}
+
+.kanban .kanban-card.content {
+	border: 1px solid var(--afx-control-border);
+	border-radius: var(--afx-radius-md);
+	background: var(--afx-bg, #fff);
+	box-shadow: none;
+	transition: box-shadow 0.12s ease, border-color 0.12s ease;
+}
+
+.kanban .kanban-card.content:hover {
+	border-color: var(--afx-primary-200, #c3ccf7);
+	box-shadow: 0 10px 24px -16px rgba(12, 16, 24, 0.45);
+}
+
+.kanban .kanban-card-title {
+	font-weight: 600;
+	color: var(--afx-label-strong, #10141c);
+}
+
+.kanban .kanban-card-doc {
+	font-size: 11px;
+	color: var(--afx-muted, #8d96a8);
+}
+
+.kanban .kanban-card-meta {
+	padding-top: 6px;
+	border-top: 1px solid var(--afx-control-border);
+	margin-top: 8px;
+}
+
+[data-theme="dark"] .kanban .kanban-column {
+	background: #14161b;
+	border-color: var(--afx-control-border);
+}
+
+[data-theme="dark"] .kanban .kanban-card.content {
+	background: var(--afx-bg, #16181d);
+}
+
+/* ------------------------------------- stat tiles and charts (frames 45, 102) -- */
+
+/* The kit's dashboard row: label with an info glyph, one large number, no
+   chrome beyond the card. Frappe's number cards are the same object. */
+.widget.number-widget-box {
+	border-radius: var(--afx-radius-lg);
+	border: 1px solid var(--afx-control-border);
+	background: var(--afx-bg, #fff);
+	box-shadow: none;
+}
+
+.widget.number-widget-box .widget-head .widget-title {
+	font-size: 13px;
+	font-weight: 500;
+	color: var(--afx-muted, #8d96a8);
+}
+
+.widget.number-widget-box .number-card-loading,
+.widget.number-widget-box .widget-content .number {
+	font-size: 26px;
+	font-weight: 700;
+	letter-spacing: -0.01em;
+	color: var(--afx-label-strong, #10141c);
+}
+
+.widget.chart-widget-box,
+.dashboard-section .chart-container {
+	border-radius: var(--afx-radius-lg);
+	border: 1px solid var(--afx-control-border);
+	background: var(--afx-bg, #fff);
+}
+
+/* ------------------------------------------- report view (frame 102) -- */
+
+/* Query reports and the report list view both render a DataTable. The kit
+   frames it as one card with a grey header, like the list view. */
+.report-wrapper .dt-scrollable,
+.report-wrapper .datatable {
+	border-radius: var(--afx-radius-lg);
+	overflow: hidden;
+}
+
+.report-wrapper .datatable {
+	border: 1px solid var(--afx-control-border);
+}
+
+.report-wrapper .dt-header,
+.report-wrapper .dt-row-header .dt-cell {
+	background: var(--afx-hover, #f5f7fa) !important;
+	font-weight: 600;
+	color: var(--afx-label, #48505f);
+}
+
+.report-wrapper .dt-cell {
+	border-color: var(--afx-control-border) !important;
+}
+
+.report-wrapper .dt-row:hover .dt-cell {
+	background: var(--afx-hover, #f8fafc) !important;
+}
+
+/* the chart above the table is its own card, as in the frame */
+.page-form + .chart-wrapper,
+.layout-main-section > .chart-wrapper,
+.report-wrapper .chart-section {
+	border: 1px solid var(--afx-control-border);
+	border-radius: var(--afx-radius-lg);
+	background: var(--afx-bg, #fff);
+	padding: 8px 12px;
+	margin-bottom: 14px;
+}
+
+[data-theme="dark"] .report-wrapper .dt-header,
+[data-theme="dark"] .report-wrapper .dt-row-header .dt-cell {
+	background: #1a1d23 !important;
+}
+
+/* ------------------------------------- employee form (frame 23) -- */
+
+/* The frame puts identity in a card on the left and the record's sections in
+   cards on the right, under a tab strip. Frappe's form already has the tab
+   strip and a sidebar; both are restyled rather than rebuilt. */
+.form-tabs-list {
+	border-bottom: 1px solid var(--afx-control-border);
+}
+
+.form-tabs .nav-link {
+	font-weight: 500;
+	color: var(--afx-label, #48505f);
+	border: none;
+	padding: 10px 2px;
+	margin-right: 22px;
+}
+
+.form-tabs .nav-link.active {
+	color: var(--afx-primary);
+	border-bottom: 2px solid var(--afx-primary);
+	background: transparent;
+}
+
+.form-tabs .nav-link:hover {
+	color: var(--afx-primary);
+}
+
+/* identity block: photo, name, id, then the record's own actions — v16 names
+   these .sidebar-section inside .form-sidebar */
+.form-sidebar {
+	border: 1px solid var(--afx-control-border);
+	border-radius: var(--afx-radius-lg);
+	background: var(--afx-bg, #fff);
+	padding: 4px 14px;
+}
+
+.form-sidebar .sidebar-image-section {
+	padding-top: 14px;
+}
+
+.form-sidebar .sidebar-image,
+.form-sidebar .sidebar-standard-image {
+	border-radius: var(--afx-radius-lg);
+}
+
+.form-sidebar .sidebar-section {
+	border-color: var(--afx-control-border) !important;
+}
+
+.form-sidebar .sidebar-meta-details {
+	padding-bottom: 12px;
+}
+
+/* section headings inside the form read as card headers */
+.form-page .form-section .section-head {
+	font-weight: 600;
+	color: var(--afx-label-strong, #10141c);
+	letter-spacing: 0;
+}
+
+/* card count beside the column title, written by afintrix_kanban.js */
+.kanban .kanban-title[data-afx-count]::after {
+	content: " " attr(data-afx-count);
+	display: inline-block;
+	margin-left: 8px;
+	min-width: 20px;
+	padding: 1px 7px;
+	border-radius: 999px;
+	background: var(--afx-active, #f1f3f8);
+	color: var(--afx-label, #48505f);
+	font-size: 11px;
+	font-weight: 600;
+	text-align: center;
+}
+
+.kanban .kanban-title[data-afx-count] {
+	overflow: visible;
+}
+
+[data-theme="dark"] .kanban .kanban-title[data-afx-count]::after {
+	background: #23262e;
+	color: #aeb6c4;
+}

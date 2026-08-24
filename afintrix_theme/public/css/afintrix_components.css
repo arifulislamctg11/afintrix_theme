@@ -134,6 +134,19 @@ textarea.form-control,
 	background: var(--afx-hover, #f8fafc);
 }
 
+/* The inherited theme forces the content column to the full width, which was
+   harmless while every side section was hidden. Document forms keep their
+   sidebar again, so on those pages the column shares the row instead. */
+body .layout-main:has(.form-sidebar) .layout-main-section {
+	width: auto !important;
+	max-width: none !important;
+	flex: 1 1 auto !important;
+}
+
+body .layout-main:has(.form-sidebar) .layout-side-section {
+	flex: 0 0 auto;
+}
+
 /* --------------------------------------------------------- list view -- */
 
 .list-row-head,
@@ -181,6 +194,23 @@ textarea.form-control,
 .list-paging-area .btn,
 .list-count {
 	border-radius: var(--afx-radius-md);
+}
+
+/* The kanban and report views move the filter control into the page head. The
+   clear-filter button inherits the kit's button padding, which makes the pair
+   wider than the slot they sit in, so the group wrapped onto a second line and
+   overlapped the breadcrumbs. */
+.page-head .custom-actions .filter-section,
+.filter-selector .btn-group {
+	flex-wrap: nowrap;
+	align-items: center;
+}
+
+.filter-selector .filter-x-button {
+	width: 32px;
+	min-width: 32px;
+	padding: 0;
+	justify-content: center;
 }
 
 /* standard filter row reads as a strip of pills, as in the kit */

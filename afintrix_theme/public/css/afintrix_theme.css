@@ -210,11 +210,14 @@ select.input-with-feedback {
     cursor: pointer;
 }
 
-/* Permanently hide Frappe's native workspace sidebars everywhere */
-.layout-side-section,
+/* Hide Frappe's native workspace/list side sections. The :not() keeps the
+   document form's own sidebar — image, assignments, attachments, tags — which
+   this rule used to take with it; frame 23 of the kit shows that identity block
+   on the employee record, and hiding it also cost every form its assignments. */
+.layout-side-section:not(:has(.form-sidebar)),
 .desk-sidebar,
 .sidebar-toggle-btn,
-body.naidapa-theme-active .layout-side-section,
+body.naidapa-theme-active .layout-side-section:not(:has(.form-sidebar)),
 body.naidapa-theme-active .sidebar-toggle-btn,
 body.naidapa-theme-active .desk-sidebar {
     display: none !important;
