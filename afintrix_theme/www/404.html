@@ -1,0 +1,16 @@
+{% extends "afintrix_theme/www/message.html" %}
+
+{#- Frappe's own 404 is a bare heading on a tinted page. This puts it on the
+    same branded card as every other web message, so a missing page looks like
+    part of the product rather than a stack trace with a haircut. -#}
+
+{% block title %}{{ _("Not Found") }}{% endblock %}
+
+{% block message_body %}
+<p class="subtitle">
+	{{ _("The page you are looking for does not exist, or has moved.") }}
+</p>
+<div>
+	<a href="/app" class="btn-primary">{{ _("Back to the workspace") }}</a>
+</div>
+{% endblock %}

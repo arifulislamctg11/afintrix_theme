@@ -11,7 +11,7 @@ set -euo pipefail
 
 SITE="${SITE:-afintrix.localhost}"
 BASE_URL="${AFX_BASE_URL:-http://localhost:8000}"
-MODULES=(test_sidebar test_hr_theme test_help_center test_modules test_provision)
+MODULES=(test_sidebar test_hr_theme test_help_center test_modules test_provision test_print)
 
 if [[ ! -d "sites" ]]; then
 	echo "run this from the bench directory (no ./sites here)" >&2

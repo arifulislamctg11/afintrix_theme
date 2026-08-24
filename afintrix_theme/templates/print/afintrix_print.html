@@ -1,0 +1,93 @@
+{# Shared print building blocks — Phase 6.
+
+   Every Afintrix print format is assembled from these macros, so the six
+   documents a client actually sends look like one product and a change to the
+   header is made once. The styling lives in the Afintrix print style, which
+   applies to every format on the site, so the formats themselves carry no CSS.
+#}
+
+{%- macro head(title, number, meta) -%}
+<div class="afx-print-head">
+	<div>
+		<div class="afx-print-title">{{ title }}</div>
+		<div class="afx-print-number">{{ number }}</div>
+	</div>
+	<div class="afx-print-meta">
+		{%- for label, value in meta -%}
+			{%- if value -%}<div><span>{{ label }}</span> {{ value }}</div>{%- endif -%}
+		{%- endfor -%}
+	</div>
+</div>
+{%- endmacro -%}
+
+{%- macro parties(blocks) -%}
+<div class="afx-print-parties">
+	{%- for label, name, lines in blocks -%}
+	<div>
+		<div class="afx-print-label">{{ label }}</div>
+		<div class="afx-print-strong">{{ name or "" }}</div>
+		<div class="afx-print-muted">{{ lines or "" }}</div>
+	</div>
+	{%- endfor -%}
+</div>
+{%- endmacro -%}
+
+{#- columns: a list of (heading, width, align) -#}
+{%- macro table_open(columns) -%}
+<table class="table table-bordered afx-print-items">
+	<thead>
+		<tr>
+			<th style="width: 4%">#</th>
+			{%- for heading, width, align in columns -%}
+			<th style="width: {{ width }}" class="text-{{ align }}">{{ heading }}</th>
+			{%- endfor -%}
+		</tr>
+	</thead>
+	<tbody>
+{%- endmacro -%}
+
+{%- macro table_close() -%}
+	</tbody>
+</table>
+{%- endmacro -%}
+
+{%- macro item_cell(name, description) -%}
+<td>
+	<div class="afx-print-strong">{{ name or "" }}</div>
+	{%- if description and description != name -%}
+	<div class="afx-print-muted">{{ description }}</div>
+	{%- endif -%}
+</td>
+{%- endmacro -%}
+
+{#- rows: a list of (label, value, is_total) -#}
+{%- macro summary(rows) -%}
+<div class="afx-print-summary">
+	<table>
+		{%- for label, value, is_total in rows -%}
+		{%- if value is not none -%}
+		<tr class="{{ 'afx-print-total' if is_total else '' }}">
+			<td>{{ label }}</td>
+			<td class="text-right">{{ value }}</td>
+		</tr>
+		{%- endif -%}
+		{%- endfor -%}
+	</table>
+</div>
+{%- endmacro -%}
+
+{%- macro terms(label, text) -%}
+{%- if text -%}
+<div class="afx-print-terms">
+	<div class="afx-print-label">{{ label }}</div>
+	{{ text }}
+</div>
+{%- endif -%}
+{%- endmacro -%}
+
+{%- macro signatures(left, right) -%}
+<div class="afx-print-signatures">
+	<div><span class="afx-print-signline"></span>{{ left }}</div>
+	<div><span class="afx-print-signline"></span>{{ right }}</div>
+</div>
+{%- endmacro -%}

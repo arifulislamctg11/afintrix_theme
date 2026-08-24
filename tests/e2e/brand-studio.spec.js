@@ -13,6 +13,12 @@ test.describe("Brand Studio", () => {
 	});
 
 	test("loads the site's current branding into the form", async ({ page }) => {
+		// the form fills from an xcall, so the control exists before its value does
+		await page.waitForFunction(() => {
+			const input = document.querySelector('[data-fieldname="title"] input');
+			return input && input.value.length > 0;
+		});
+
 		const title = await page.inputValue('[data-fieldname="title"] input');
 		expect(title.length).toBeGreaterThan(0);
 		await expect(page.locator(".afx-preview-name")).toHaveText(title);

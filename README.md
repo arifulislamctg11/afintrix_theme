@@ -23,7 +23,8 @@ dashboard UI kit (layout language only — colours and type are Afintrix's own).
 | `afintrix_theme/afintrix_theme/page/help_center/` | the Help Center (the one screen built, not skinned) |
 | `afintrix_theme/afintrix_theme/page/brand_studio/` | the per-tenant branding screen |
 | `afintrix_theme/provision.py` | branding profiles: export, apply, reset |
-| `afintrix_theme/afintrix_theme/print_style/`, `print_format/` | Afintrix print style and invoice |
+| `afintrix_theme/templates/print/afintrix_print.html` | the macros every print format is built from |
+| `afintrix_theme/afintrix_theme/print_style/`, `print_format/` | the Afintrix print style and six document formats |
 | `afintrix_theme/public/scss/afintrix_email.bundle.scss` | transactional email styling |
 | `afintrix_theme/demo/` | seed scripts: HR data, Help Center copy, letter head and print defaults |
 | `scripts/new_tenant.sh` | provision a client site end to end |
@@ -61,7 +62,7 @@ scripts/test.sh                      # everything, from the bench directory
 or by hand:
 
 ```bash
-for m in test_sidebar test_hr_theme test_help_center test_modules test_provision; do
+for m in test_sidebar test_hr_theme test_help_center test_modules test_provision test_print; do
   bench --site <site> run-tests --module afintrix_theme.tests.$m \
     --skip-before-tests --lightmode --test-category unit
 done
