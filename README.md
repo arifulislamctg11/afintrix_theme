@@ -65,7 +65,7 @@ scripts/test.sh                      # everything, from the bench directory
 or by hand:
 
 ```bash
-for m in test_sidebar test_hr_theme test_help_center test_modules test_provision test_print; do
+for m in test_sidebar test_hr_theme test_help_center test_modules test_provision test_print test_charts; do
   bench --site <site> run-tests --module afintrix_theme.tests.$m \
     --skip-before-tests --lightmode --test-category unit
 done
@@ -105,6 +105,17 @@ bench --site b execute afintrix_theme.provision.apply_profile  --kwargs "{'path'
 # back to the house brand
 bench --site b execute afintrix_theme.provision.apply_defaults
 ```
+
+Dashboard chart colour is data too:
+
+```bash
+bench --site <site> execute afintrix_theme.provision.apply_chart_palette
+bench --site <site> execute afintrix_theme.provision.apply_chart_palette --kwargs "{'include_series': True}"
+bench --site <site> execute afintrix_theme.provision.apply_chart_palette --kwargs "{'reset': True}"
+```
+
+By default it sets each chart's own colour and leaves multi-series charts alone, because their
+series are usually statuses and status colour stays semantic.
 
 In the desk, the same thing is **Brand Studio** (`/app/brand-studio`, System Manager only), with a
 live preview.

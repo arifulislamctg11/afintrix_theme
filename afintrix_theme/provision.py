@@ -189,3 +189,121 @@ def save_branding(profile):
 def reset_branding():
 	_guard()
 	return apply_defaults()
+
+
+# ------------------------------------------------------------ chart colour --
+#
+# Chart colour is data, not code: every Dashboard Chart record carries its own
+# `color`, and a multi-series chart carries one per series in `y_axis`. Frappe
+# falls back to its own palette when they are blank, which is why an otherwise
+# Afintrix desk still drew charts in frappe blue-and-grey.
+#
+#     bench --site <site> execute afintrix_theme.provision.apply_chart_palette
+#     bench --site <site> execute afintrix_theme.provision.apply_chart_palette \\
+#         --kwargs "{'reset': True}"
+#
+# `reset` clears them instead, handing the charts back to frappe. Colours are
+# assigned in a stable order, so re-running is a no-op rather than a reshuffle.
+
+#: Brand first, then hues that stay distinguishable side by side and in print.
+#: Status colours stay semantic elsewhere; a chart series is not a status.
+CHART_PALETTE = [
+	"#1E39D6",  # Afintrix primary
+	"#D5AA55",  # Afintrix gold
+	"#0B7A5C",  # green
+	"#5B2EA6",  # purple
+	"#B7280C",  # rust
+	"#127C9C",  # teal
+	"#8A5A10",  # amber
+	"#4B5563",  # slate
+]
+
+
+def _palette():
+	"""The site's own primary first, so a re-branded tenant leads with its colour."""
+	import frappe
+
+	primary = frappe.db.get_single_value("Theme Settings", "primary_color")
+	accent = frappe.db.get_single_value("Theme Settings", "secondary_color")
+
+	palette = list(CHART_PALETTE)
+	if primary:
+		palette = [primary] + [c for c in palette if c.lower() != primary.lower()]
+	if accent:
+		rest = [c for c in palette[1:] if c.lower() != accent.lower()]
+		palette = [palette[0], accent] + rest
+	return palette
+
+
+def _set_custom_colours(chart, palette, index, reset):
+	"""Merge (or drop) a colour list in the chart's custom_options JSON."""
+	import json
+
+	import frappe
+
+	try:
+		options = json.loads(chart.get("custom_options") or "{}")
+	except ValueError:
+		options = {}
+
+	if reset:
+		if "colors" not in options:
+			return False
+		options.pop("colors")
+	else:
+		colours = [palette[(index + offset) % len(palette)] for offset in range(4)]
+		if options.get("colors") == colours:
+			return False
+		options["colors"] = colours
+
+	chart.custom_options = json.dumps(options) if options else ""
+	return True
+
+
+def apply_chart_palette(reset=False, include_series=False):
+	"""Paint the dashboard charts from the brand palette.
+
+	By default this sets each chart's single `color` only. Multi-series charts
+	are left alone: their series are often statuses — present, absent, on leave —
+	and SPEC section 4 keeps status colour semantic rather than brand-coloured.
+	Pass `include_series=True` to paint those too, for charts where the series
+	are categories rather than states.
+	"""
+	import frappe
+
+	frappe.set_user("Administrator")
+	palette = _palette()
+	touched = 0
+
+	for index, name in enumerate(frappe.get_all("Dashboard Chart", pluck="name")):
+		chart = frappe.get_doc("Dashboard Chart", name)
+		colour = None if reset else palette[index % len(palette)]
+
+		changed = False
+		if (chart.color or None) != colour:
+			chart.color = colour
+			changed = True
+
+		series = chart.get("y_axis") or []
+		for series_index, row in enumerate(series if include_series or reset else []):
+			series_colour = None if reset else palette[(index + series_index) % len(palette)]
+			if (row.color or None) != series_colour:
+				row.color = series_colour
+				changed = True
+
+		# A chart without y_axis rows — a report or group-by chart — draws its
+		# series from frappe's own palette unless custom_options says otherwise.
+		if (include_series or reset) and not series:
+			if _set_custom_colours(chart, palette, index, reset):
+				changed = True
+
+		if changed:
+			chart.flags.ignore_permissions = True
+			chart.flags.ignore_validate = True
+			chart.save(ignore_permissions=True)
+			touched += 1
+
+	frappe.db.commit()
+	frappe.clear_cache()
+	print({"charts": touched, "reset": bool(reset), "series": bool(include_series)})
+	return touched
