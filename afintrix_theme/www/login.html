@@ -12,6 +12,9 @@
 
 {% set theme_logo = frappe.db.get_single_value("Theme Settings", "sidebar_logo") %}
 {% set theme_title = frappe.db.get_single_value("Theme Settings", "title") or "Afintrix" %}
+{# Phase 5: a tenant sets its own headline in Brand Studio; the Afintrix copy is the fallback #}
+{% set theme_headline = frappe.db.get_single_value("Theme Settings", "login_tag") %}
+{% set theme_sub = frappe.db.get_single_value("Theme Settings", "login_description") %}
 {% set primary = frappe.db.get_single_value("Theme Settings", "primary_color") or "#1E39D6" %}
 {% set secondary = frappe.db.get_single_value("Theme Settings", "secondary_color") or "#B77F27" %}
 
@@ -410,9 +413,11 @@
 			<span>{{ theme_title }}</span>
 		</div>
 		<div class="afx-auth-rule"></div>
-		<h2 class="afx-auth-headline">{{ _("Advisory and analytics, in one workspace.") }}</h2>
+		<h2 class="afx-auth-headline">
+			{{ theme_headline or _("Advisory and analytics, in one workspace.") }}
+		</h2>
 		<p class="afx-auth-sub">
-			{{ _("Sign in to reach your reports, records and day-to-day operations.") }}
+			{{ theme_sub or _("Sign in to reach your reports, records and day-to-day operations.") }}
 		</p>
 	</aside>
 

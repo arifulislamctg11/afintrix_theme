@@ -1,0 +1,11 @@
+{
+  "title": "Northwind Advisory",
+  "sidebar_text": "Home",
+  "primary_color": "#0B7A5C",
+  "secondary_color": "#C89B3C",
+  "login_tag": "Numbers you can act on.",
+  "login_description": "Sign in to reach your reports, records and day-to-day operations.",
+  "support_email": "support@northwind.example",
+  "support_phone": "+1 555 0100",
+  "support_hours": "Monday to Friday, 09:00 - 17:00"
+}

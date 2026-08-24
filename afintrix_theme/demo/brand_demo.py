@@ -10,7 +10,9 @@ It is safe to re-run; it only fills in what is unset.
 
 import frappe
 
-LETTER_HEAD = "Afintrix"
+#: The letter head is named after the tenant, not the house brand — a site
+#: re-branded through Brand Studio should not print someone else's name.
+DEFAULT_LETTER_HEAD = "Afintrix"
 
 
 def _logo():
@@ -24,7 +26,8 @@ def _logo():
 
 def letter_head():
 	"""Logo on the left, company name on the right, gold rule underneath."""
-	brand = frappe.db.get_single_value("Theme Settings", "title") or "Afintrix"
+	brand = frappe.db.get_single_value("Theme Settings", "title") or DEFAULT_LETTER_HEAD
+	name = brand
 	content = f"""<div style="display:flex;align-items:center;justify-content:space-between;
 	border-bottom:3px solid #D5AA55;padding-bottom:10px;">
 	<img src="{_logo()}" style="height:34px">
@@ -33,16 +36,16 @@ def letter_head():
 	</div>
 </div>"""
 
-	footer = """<div style="font-family:Montserrat,Arial,sans-serif;color:#8d96a8;font-size:10px;
+	footer = f"""<div style="font-family:Montserrat,Arial,sans-serif;color:#8d96a8;font-size:10px;
 	border-top:1px solid #e4e8ef;padding-top:6px;text-align:center">
-	Afintrix Advisory Analytics
+	{frappe.utils.escape_html(brand)}
 </div>"""
 
-	if frappe.db.exists("Letter Head", LETTER_HEAD):
-		doc = frappe.get_doc("Letter Head", LETTER_HEAD)
+	if frappe.db.exists("Letter Head", name):
+		doc = frappe.get_doc("Letter Head", name)
 	else:
 		doc = frappe.new_doc("Letter Head")
-		doc.letter_head_name = LETTER_HEAD
+		doc.letter_head_name = name
 
 	doc.source = "HTML"
 	doc.content = content
