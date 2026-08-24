@@ -1,0 +1,111 @@
+// Transactional email styling — Phase 3.
+//
+// Frappe composes outgoing mail from its own templates and inlines whatever the
+// email_css hook supplies. There is no kit frame for email, so this follows the
+// design system: Montserrat with a web-safe fallback (mail clients will not load
+// a self-hosted font), brand blue for links and buttons, the gold rule as the
+// header divider, and the same grey table header the desk and the print format
+// use. Everything is deliberately simple: no flexbox, no custom properties,
+// nothing Outlook drops on the floor.
+
+$afx-primary: #1e39d6;
+$afx-deep: #121ca4;
+$afx-gold: #d5aa55;
+$afx-ink: #10141c;
+$afx-body: #48505f;
+$afx-muted: #8d96a8;
+$afx-border: #e4e8ef;
+$afx-surface: #f5f7fa;
+$afx-font: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+body,
+.email-body,
+.panel-body,
+td,
+p,
+div {
+	font-family: $afx-font;
+	color: $afx-body;
+}
+
+h1,
+h2,
+h3,
+h4,
+.email-heading {
+	font-family: $afx-font;
+	color: $afx-ink;
+	font-weight: 700;
+	letter-spacing: -0.01em;
+}
+
+a {
+	color: $afx-primary;
+}
+
+a:hover {
+	color: $afx-deep;
+}
+
+.panel-header {
+	background-color: $afx-surface;
+	border: 1px solid $afx-border;
+	border-bottom: 3px solid $afx-gold;
+	border-radius: 8px 8px 0 0;
+	color: $afx-ink;
+}
+
+.panel-body {
+	background-color: #ffffff;
+	border: 1px solid $afx-border;
+	border-top: none;
+	border-radius: 0 0 8px 8px;
+}
+
+// the call to action frappe renders for approvals, invitations and share links
+.btn,
+.btn-primary,
+a.btn-primary {
+	background-color: $afx-primary !important;
+	border-color: $afx-primary !important;
+	color: #ffffff !important;
+	border-radius: 8px;
+	font-weight: 600;
+	text-decoration: none;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+th {
+	background-color: $afx-surface;
+	color: $afx-body;
+	font-weight: 600;
+	border-bottom: 1px solid $afx-border;
+	text-align: left;
+}
+
+td,
+th {
+	padding: 8px 10px;
+	border-color: $afx-border;
+}
+
+blockquote {
+	border-left: 3px solid $afx-gold;
+	color: $afx-muted;
+	margin-left: 0;
+	padding-left: 12px;
+}
+
+.text-muted,
+.email-footer,
+small {
+	color: $afx-muted !important;
+}
+
+hr {
+	border: none;
+	border-top: 1px solid $afx-border;
+}

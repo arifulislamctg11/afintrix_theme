@@ -1,5 +1,20 @@
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
+/* Montserrat, self-hosted — the portal was still fetching Outfit from the Google
+   CDN on every page load, which Phase 1 removed from the desk. */
+@font-face {
+	font-family: "Montserrat";
+	src: url("/assets/afintrix_theme/fonts/montserrat-latin.woff2") format("woff2");
+	font-weight: 100 900;
+	font-display: swap;
+}
 
+@font-face {
+	font-family: "Montserrat";
+	src: url("/assets/afintrix_theme/fonts/montserrat-latin-ext.woff2") format("woff2");
+	font-weight: 100 900;
+	font-display: swap;
+	unicode-range: U+0100-02AF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF,
+		U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
 /* ==========================================================================
    NAIDAPA PORTAL THEME — Match the Desk (KI-Admin) Design
    ==========================================================================
@@ -11,29 +26,29 @@
 /* 1. CSS VARIABLES                                                           */
 /* -------------------------------------------------------------------------- */
 :root {
-    --np-primary: #0f626a;
-    --np-primary-hover: #0c4e55;
-    --np-primary-light: rgba(15, 98, 106, 0.08);
-    --np-primary-glow: rgba(15, 98, 106, 0.15);
+    --np-primary: #1E39D6;
+    --np-primary-hover: #121CA4;
+    --np-primary-light: rgba(30, 57, 214, 0.08);
+    --np-primary-glow: rgba(30, 57, 214, 0.15);
     --np-surface: #ffffff;
-    --np-bg: #f5fbfb;
+    --np-bg: #f6f8fd;
     --np-bg-alt: #f6f7fa;
-    --np-text: #082f32;
+    --np-text: #10141c;
     --np-text-secondary: #a0a0b0;
     --np-text-muted: #6c757d;
     --np-border: #ebedf0;
     --np-border-hover: #b0b9c4;
     --np-shadow: 0 0.1rem 0.5rem 0 rgba(40, 35, 45, 0.10);
     --np-shadow-hover: 0 0.5rem 2rem rgba(244, 247, 248, 1);
-    --np-shadow-card: 0 4px 20px rgba(15, 98, 106, 0.06);
+    --np-shadow-card: 0 4px 20px rgba(16, 20, 28, 0.06);
     --np-radius-lg: 12px;
     --np-radius-md: 8px;
     --np-radius-sm: 4px;
     --np-transition: all 0.3s ease;
     --np-sidebar-width: 260px;
     --np-navbar-height: 60px;
-    --np-gradient-green: linear-gradient(135deg, #10b981 0%, #73c76b 60%, #d4dda0 100%);
-    --np-gradient-teal: linear-gradient(135deg, #10b981 0%, #0d6b59 100%);
+    --np-gradient-green: linear-gradient(135deg, #1E39D6 0%, #121CA4 60%, #D5AA55 100%);
+    --np-gradient-teal: linear-gradient(135deg, #1E39D6 0%, #121CA4 100%);
 }
 
 
@@ -41,7 +56,7 @@
 /* 2. GLOBAL OVERRIDES                                                        */
 /* -------------------------------------------------------------------------- */
 body {
-    font-family: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif !important;
+    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif !important;
     background-color: var(--np-bg) !important;
     color: var(--np-text) !important;
     -webkit-font-smoothing: antialiased;
@@ -421,7 +436,7 @@ textarea.form-control {
     box-shadow: none !important;
     transition: all 0.2s ease-in-out !important;
     line-height: 1.5 !important;
-    font-family: 'Outfit', sans-serif !important;
+    font-family: 'Montserrat', sans-serif !important;
 }
 
 .form-control:hover,
@@ -458,7 +473,7 @@ select.form-control:focus {
     font-size: 14px !important;
     padding: 8px 20px !important;
     transition: var(--np-transition) !important;
-    font-family: 'Outfit', sans-serif !important;
+    font-family: 'Montserrat', sans-serif !important;
     box-shadow: none !important;
 }
 
@@ -800,7 +815,7 @@ footer .btn-primary {
 /* -------------------------------------------------------------------------- */
 
 .print-format {
-    font-family: 'Outfit', sans-serif !important;
+    font-family: 'Montserrat', sans-serif !important;
 }
 
 

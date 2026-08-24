@@ -119,10 +119,14 @@ class TestSidebarContext(FrappeTestCase):
 		self.assertTrue(context["brand_title"])
 		self.assertTrue(context["app_logo"])
 
-	def test_sidebar_has_no_external_help_link(self):
-		# The ERPNext docs backlink was dropped; the real Help Center is Phase 3.
+	def test_help_link_points_at_our_own_help_centre(self):
+		# The ERPNext docs backlink was dropped in the Phase 1 feedback round; the
+		# Phase 3 Help Center took its place, so the link is internal now.
 		self.assertNotIn("help_url", get_sidebar_context())
-		self.assertNotIn("Help Center", get_sidebar_html())
+
+		html = get_sidebar_html()
+		self.assertNotIn("docs.erpnext.com", html)
+		self.assertIn('href="/app/help-center"', html)
 
 	def test_rendered_sidebar_carries_the_shell_markup(self):
 		html = get_sidebar_html()

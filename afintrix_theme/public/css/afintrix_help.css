@@ -1,0 +1,254 @@
+/* ==========================================================================
+   Help Center — Phase 3, frames 131 to 135.
+   The only screens in this project drawn from scratch: ERPNext has no
+   equivalent, so the kit's layout is followed directly.
+   ========================================================================== */
+
+.afx-help {
+	padding: 4px 0 32px;
+}
+
+.afx-help-head {
+	display: flex;
+	align-items: flex-start;
+	justify-content: space-between;
+	gap: 24px;
+	margin-bottom: 24px;
+}
+
+.afx-help-title {
+	margin: 0;
+	font-size: 26px;
+	font-weight: 700;
+	letter-spacing: -0.01em;
+	color: var(--afx-label-strong, #10141c);
+}
+
+.afx-help-crumb {
+	margin-top: 4px;
+	font-size: 13px;
+	color: var(--afx-muted, #8d96a8);
+}
+
+.afx-help-crumb a {
+	color: var(--afx-muted, #8d96a8);
+	text-decoration: none;
+}
+
+.afx-help-crumb a:hover {
+	color: var(--afx-primary);
+}
+
+.afx-help-sep {
+	margin: 0 6px;
+}
+
+.afx-help-search {
+	flex: 0 1 380px;
+}
+
+.afx-help-search .form-control {
+	height: 44px;
+	border-radius: var(--afx-radius-lg);
+}
+
+/* ------------------------------------------------------------ index -- */
+
+.afx-help-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+	gap: 18px;
+}
+
+.afx-help-card {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+	padding: 22px;
+	border: 1px solid var(--afx-control-border);
+	border-radius: var(--afx-radius-xl);
+	background: var(--afx-bg, #fff);
+	text-decoration: none !important;
+	transition: border-color 0.12s ease, box-shadow 0.12s ease, transform 0.12s ease;
+}
+
+.afx-help-card:hover {
+	border-color: var(--afx-primary-200, #c3ccf7);
+	box-shadow: 0 18px 36px -24px rgba(12, 16, 24, 0.4);
+	transform: translateY(-1px);
+}
+
+.afx-help-icon {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 46px;
+	height: 46px;
+	margin-bottom: 12px;
+	border-radius: 50%;
+	background: var(--afx-primary-050, #eef1fd);
+	color: var(--afx-primary);
+	font-size: 22px;
+}
+
+.afx-help-card-title {
+	font-size: 17px;
+	font-weight: 600;
+	color: var(--afx-label-strong, #10141c);
+}
+
+.afx-help-card-text {
+	font-size: 13px;
+	color: var(--afx-muted, #8d96a8);
+}
+
+.afx-help-count {
+	position: absolute;
+	top: 18px;
+	right: 18px;
+	min-width: 24px;
+	padding: 2px 8px;
+	border-radius: 999px;
+	background: var(--afx-primary-050, #eef1fd);
+	color: var(--afx-primary);
+	font-size: 12px;
+	font-weight: 600;
+	text-align: center;
+}
+
+/* --------------------------------------------------------- articles -- */
+
+.afx-help-articles,
+.afx-help-shortcuts,
+.afx-help-contact {
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+}
+
+.afx-help-article,
+.afx-help-doc,
+.afx-help-shortcut-group,
+.afx-help-contact-card {
+	padding: 22px 24px;
+	border: 1px solid var(--afx-control-border);
+	border-radius: var(--afx-radius-xl);
+	background: var(--afx-bg, #fff);
+}
+
+.afx-help-article h2,
+.afx-help-shortcut-group h2,
+.afx-help-contact-card h2 {
+	margin: 0 0 10px;
+	font-size: 17px;
+	font-weight: 600;
+	color: var(--afx-label-strong, #10141c);
+}
+
+.afx-help-article-body,
+.afx-help-doc {
+	color: var(--afx-label, #48505f);
+	line-height: 1.65;
+}
+
+.afx-help-article-meta {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	margin-top: 14px;
+	font-size: 12px;
+	color: var(--afx-muted, #8d96a8);
+}
+
+.afx-help-empty {
+	padding: 40px;
+	border: 1px dashed var(--afx-control-border);
+	border-radius: var(--afx-radius-xl);
+	text-align: center;
+	color: var(--afx-muted, #8d96a8);
+}
+
+/* -------------------------------------------------------- shortcuts -- */
+
+.afx-help-shortcut {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 9px 0;
+	border-bottom: 1px solid var(--afx-control-border);
+	color: var(--afx-label, #48505f);
+	font-size: 14px;
+}
+
+.afx-help-shortcut:last-child {
+	border-bottom: none;
+}
+
+.afx-help-shortcut kbd {
+	padding: 3px 9px;
+	border: 1px solid var(--afx-control-border);
+	border-radius: 8px;
+	background: var(--afx-hover, #f5f7fa);
+	color: var(--afx-label-strong, #10141c);
+	font-size: 12px;
+	font-family: inherit;
+}
+
+/* ---------------------------------------------------------- contact -- */
+
+.afx-help-contact {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+	align-items: start;
+}
+
+.afx-help-contact-line {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	margin-bottom: 10px;
+	color: var(--afx-label, #48505f);
+	font-size: 14px;
+}
+
+.afx-help-contact-line iconify-icon {
+	color: var(--afx-primary);
+	font-size: 18px;
+}
+
+.afx-help-form .form-group {
+	margin-bottom: 14px;
+}
+
+.afx-help-form label {
+	font-size: 13px;
+	font-weight: 500;
+	color: var(--afx-label, #48505f);
+}
+
+/* ------------------------------------------------------------- dark -- */
+
+[data-theme="dark"] .afx-help-card,
+[data-theme="dark"] .afx-help-article,
+[data-theme="dark"] .afx-help-doc,
+[data-theme="dark"] .afx-help-shortcut-group,
+[data-theme="dark"] .afx-help-contact-card {
+	background: var(--afx-bg, #16181d);
+}
+
+[data-theme="dark"] .afx-help-icon,
+[data-theme="dark"] .afx-help-count {
+	background: rgba(30, 57, 214, 0.18);
+}
+
+@media (max-width: 720px) {
+	.afx-help-head {
+		flex-direction: column;
+	}
+
+	.afx-help-search {
+		flex: 1 1 auto;
+		width: 100%;
+	}
+}

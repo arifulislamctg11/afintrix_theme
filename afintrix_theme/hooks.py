@@ -38,6 +38,9 @@ app_include_js = [
     "afintrix.bundle.js"
 ]
 
+# inlined into every outgoing email frappe composes
+email_css = "afintrix_email.bundle.css"
+
 # include js, css files in header of web template (portal/customer pages)
 web_include_css = [
     "/assets/afintrix_theme/css/afintrix_portal.css"

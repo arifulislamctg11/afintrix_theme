@@ -109,6 +109,42 @@
    "label": "Quick Links",
    "options": "Theme Quick Link",
    "description": "Shown next to the search box in the desk top bar"
+  },
+  {
+   "fieldname": "section_break_help",
+   "fieldtype": "Section Break",
+   "label": "Help Center"
+  },
+  {
+   "fieldname": "support_email",
+   "fieldtype": "Data",
+   "label": "Support Email",
+   "options": "Email"
+  },
+  {
+   "fieldname": "support_phone",
+   "fieldtype": "Data",
+   "label": "Support Phone"
+  },
+  {
+   "fieldname": "column_break_help",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "support_hours",
+   "fieldtype": "Data",
+   "label": "Support Hours",
+   "description": "Shown on Help Center › Contact Support."
+  },
+  {
+   "fieldname": "section_break_privacy",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "privacy_policy",
+   "fieldtype": "Text Editor",
+   "label": "Privacy Policy",
+   "description": "Rendered at Help Center › Privacy Policy."
   }
  ],
  "grid_page_length": 50,

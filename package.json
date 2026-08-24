@@ -1,0 +1,13 @@
+{
+  "name": "afintrix_theme",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Afintrix ERPNext theme — browser tests",
+  "scripts": {
+    "test:e2e": "playwright test",
+    "test:e2e:headed": "playwright test --headed"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.62.1"
+  }
+}
