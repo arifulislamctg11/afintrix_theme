@@ -53,13 +53,6 @@
    "label": "Login Page"
   },
   {
-   "default": "ocean",
-   "fieldname": "skin",
-   "fieldtype": "Select",
-   "label": "Skin",
-   "options": "ocean"
-  },
-  {
    "fieldname": "login_tag",
    "fieldtype": "Data",
    "label": "Login Tag"

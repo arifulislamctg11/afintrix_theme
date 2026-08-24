@@ -53,3 +53,36 @@ class TestPhase4Assets(FrappeTestCase):
 		]
 		missing = [f for f in ours if f'@import "../css/{f[:-4]}"' not in bundle]
 		self.assertEqual(missing, [], f"stylesheets not imported by the bundle: {missing}")
+
+
+class TestLegacyShellIsGone(FrappeTestCase):
+	"""The v15 shell this app was forked from.
+
+	`www/app.html` replaced frappe's desk page and wrapped it in an "ocean"
+	sidebar and navbar that the theme then hid with CSS. On v16 `/app` redirects
+	to `/desk`, so that page was already dead — it just left a hidden second
+	shell in every DOM. It and its assets are removed; these tests keep them
+	from coming back with a stray include.
+	"""
+
+	def test_the_desk_page_override_is_gone(self):
+		for name in ("app.html", "app.py"):
+			self.assertFalse(
+				os.path.exists(app_path("www", name)),
+				f"www/{name} is back; the desk shell belongs to frappe",
+			)
+
+	def test_the_ocean_templates_are_gone(self):
+		self.assertFalse(os.path.isdir(app_path("templates", "includes", "ocean")))
+
+	def test_no_dead_stylesheet_is_still_included(self):
+		hooks_css = frappe.get_hooks("app_include_css") + frappe.get_hooks("web_include_css")
+		hooks_js = frappe.get_hooks("app_include_js") + frappe.get_hooks("web_include_js")
+		for asset in hooks_css + hooks_js:
+			if not asset.startswith("/assets/afintrix_theme/"):
+				continue
+			relative = asset.replace("/assets/afintrix_theme/", "")
+			self.assertTrue(
+				os.path.exists(app_path("public", *relative.split("/"))),
+				f"hooks include a file that does not exist: {asset}",
+			)

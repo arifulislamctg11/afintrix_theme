@@ -29,8 +29,11 @@ dashboard UI kit (layout language only — colours and type are Afintrix's own).
 | `afintrix_theme/demo/` | seed scripts: HR data, Help Center copy, letter head and print defaults |
 | `scripts/new_tenant.sh` | provision a client site end to end |
 
-Two generations of code sit side by side: the v15-era `ocean_*`, `naidapa_*` and `ki_*` files came
-from the theme this app was forked from and are **inert** on v16. Work in the `afintrix_*` files.
+The v15-era shell this app was forked from — `www/app.html`, the `ocean_*` templates, the
+`naidapa_*` assets and `desk_sidebar.css` — was removed on 2026-08-25: `/app` redirects to `/desk`
+on v16, so that page had been dead for a while and only left a hidden second shell in every DOM.
+`ki_style.css` and `ki_responsive.css` are still included and still carry rules the desk relies on.
+Work in the `afintrix_*` files.
 
 ## Assets
 
