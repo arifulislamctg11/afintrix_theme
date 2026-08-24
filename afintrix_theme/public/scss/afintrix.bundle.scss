@@ -1,0 +1,15 @@
+// Afintrix desk styles, bundled so esbuild emits a content-hashed filename.
+// Plain /assets/... URLs carry no hash and are cached for 12 hours, so every CSS
+// change needed a hard reload or a fresh browser profile before this.
+//
+// The entry is .scss rather than .css because frappe's postcss plugin copies a
+// .css entry to a temp directory before resolving imports, which breaks relative
+// paths; a .scss entry is rendered by sass in place first. The extension-less
+// paths below make sass inline each file rather than emit a plain CSS @import.
+//
+// Order matters: tokens first, then shell, then components.
+@import "../css/afintrix_theme";
+@import "../css/afintrix_brand";
+@import "../css/afintrix_sidebar";
+@import "../css/afintrix_topbar";
+@import "../css/afintrix_components";
