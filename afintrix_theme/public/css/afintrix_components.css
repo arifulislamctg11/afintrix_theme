@@ -369,6 +369,31 @@ body .layout-main:has(.form-sidebar) .layout-side-section {
 	color: #e6e9ef !important;
 }
 
+/* Read-only and disabled fields kept the light template's #f8f9fa fill in dark
+   mode, so a posting date or a fetched value read as a white box. */
+/* the inherited rule is .form-control:not([type=checkbox]):not([type=radio]):disabled,
+   so these have to match its specificity to win, !important or not */
+[data-theme="dark"] .form-control:not([type="checkbox"]):not([type="radio"]):disabled,
+[data-theme="dark"] .form-control:not([type="checkbox"]):not([type="radio"])[readonly],
+[data-theme="dark"] .form-control:disabled,
+[data-theme="dark"] .form-control[readonly],
+[data-theme="dark"] .input-with-feedback:disabled,
+[data-theme="dark"] .input-with-feedback[readonly],
+[data-theme="dark"] .frappe-control input:disabled,
+[data-theme="dark"] .frappe-control input[readonly],
+[data-theme="dark"] .frappe-control textarea:disabled,
+[data-theme="dark"] .frappe-control textarea[readonly],
+[data-theme="dark"] select.form-control:disabled,
+/* a read-only field is not an input at all: frappe swaps in a div */
+[data-theme="dark"] .control-value.like-disabled-input,
+[data-theme="dark"] .like-disabled-input {
+	background-color: #1a1d23 !important;
+	border-color: var(--afx-control-border) !important;
+	color: #aeb6c4 !important;
+	-webkit-text-fill-color: #aeb6c4;
+	opacity: 1;
+}
+
 [data-theme="dark"] .form-control::placeholder {
 	color: #7b8494 !important;
 }
