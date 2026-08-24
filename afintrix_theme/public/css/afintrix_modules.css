@@ -1,0 +1,294 @@
+/* ==========================================================================
+   Afintrix — remaining modules (Phase 4)
+
+   Accounting, stock, selling, buying and the rest run on the same list, form
+   and dialog anatomy Phase 1 already covers. What was left unskinned is the
+   furniture those modules lean on more than HR does: workspace widgets, query
+   reports with totals, tree views, and the calendar and gantt views.
+   ========================================================================== */
+
+/* ------------------------------------------------ workspace: number cards -- */
+
+/* The kit's stat tile reads label first, then the number. Frappe emits the
+   title in .widget-head and the value in .widget-content, but the inherited
+   template's rules left the number on top, so the order is pinned here. */
+.widget.number-widget-box {
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+	/* the inherited template held these at 150px tall with 24px padding, which
+	   left a hole between the label and the number */
+	min-height: 0 !important;
+	height: auto !important;
+	padding: 18px 20px !important;
+}
+
+.widget.number-widget-box .widget-subtitle:empty {
+	display: none;
+}
+
+/* the inherited template sets display:contents on both wrappers, which hands
+   their children to the card's flex box and makes order on the wrappers a
+   no-op — hence the number sitting above its own label */
+.widget.number-widget-box .widget-head {
+	display: flex !important;
+	align-items: flex-start;
+	justify-content: space-between;
+	order: 1;
+	margin-bottom: 0;
+}
+
+.widget.number-widget-box .widget-body {
+	display: block !important;
+	order: 2;
+}
+
+.widget.number-widget-box .widget-content {
+	display: block !important;
+	order: 2;
+	padding: 4px 0 0 !important;
+	margin: 0 !important;
+}
+
+/* the template pads head and content again inside an already padded card */
+.widget.number-widget-box .widget-head {
+	padding: 0 !important;
+}
+
+.widget.number-widget-box .number {
+	margin: 0 !important;
+}
+
+.widget.number-widget-box .widget-title,
+.widget.number-widget-box .widget-title span {
+	color: var(--afx-muted, #8d96a8) !important;
+	font-size: 13px;
+	font-weight: 500;
+}
+
+.widget.number-widget-box .number {
+	font-size: 26px;
+	font-weight: 700;
+	line-height: 1.2;
+	letter-spacing: -0.01em;
+	color: var(--afx-label-strong, #10141c);
+}
+
+/* the percentage delta frappe prints under the value */
+.widget.number-widget-box .card-stats .indicator-pill {
+	font-size: 11px;
+}
+
+/* --------------------------------------- workspace: shortcuts and links -- */
+
+.widget.shortcut-widget-box,
+.widget.links-widget-box,
+.widget.onboarding-widget-box,
+.widget.quick-list-widget-box,
+.widget.dashboard-widget-box,
+.widget.chart-widget-box {
+	border: 1px solid var(--afx-control-border);
+	border-radius: var(--afx-radius-lg);
+	background: var(--afx-bg, #fff);
+	box-shadow: none;
+}
+
+.widget .widget-head .widget-title {
+	font-weight: 600;
+	color: var(--afx-label-strong, #10141c);
+}
+
+.widget.shortcut-widget-box:hover,
+.widget.links-widget-box:hover {
+	border-color: var(--afx-primary-200, #c3ccf7);
+}
+
+.widget .link-item,
+.widget .quick-list-item {
+	border-radius: var(--afx-radius-sm);
+}
+
+.widget .link-item:hover,
+.widget .quick-list-item:hover {
+	background: var(--afx-hover, #f5f7fa);
+}
+
+/* section headings between widget rows */
+.layout-main-section .widget-group-title,
+.workspace-sidebar-section-title {
+	font-weight: 600;
+	color: var(--afx-label-strong, #10141c);
+	letter-spacing: -0.01em;
+}
+
+/* ------------------------------------------------------- query reports -- */
+
+/* Financial statements and ledgers are read top to bottom and end in a total,
+   so the total and closing rows carry weight and the report gets the same card
+   edge as a list. */
+.report-wrapper .datatable .dt-row-totalRow .dt-cell,
+.report-wrapper .datatable .dt-cell--col-0 .dt-cell__content b,
+.report-wrapper .datatable .dt-row [class*="total"] {
+	font-weight: 700;
+	color: var(--afx-label-strong, #10141c);
+}
+
+.report-wrapper .datatable .dt-row-totalRow .dt-cell {
+	background: var(--afx-hover, #f5f7fa) !important;
+	border-top: 2px solid var(--afx-control-border) !important;
+}
+
+.report-wrapper .dt-scrollable .dt-row:nth-child(even) .dt-cell {
+	background: transparent;
+}
+
+/* tree-shaped reports (Balance Sheet, P&L) indent with a guide, not a gap */
+.report-wrapper .dt-cell__content .dt-tree-node__toggle {
+	color: var(--afx-muted, #8d96a8);
+}
+
+.report-wrapper .report-summary {
+	border: 1px solid var(--afx-control-border);
+	border-radius: var(--afx-radius-lg);
+	background: var(--afx-bg, #fff);
+	padding: 14px 18px;
+	margin-bottom: 14px;
+}
+
+.report-wrapper .report-summary .summary-label {
+	color: var(--afx-muted, #8d96a8);
+	font-size: 12px;
+}
+
+.report-wrapper .report-summary .summary-value {
+	font-weight: 700;
+	color: var(--afx-label-strong, #10141c);
+}
+
+/* ---------------------------------------------------------- tree views -- */
+
+/* Chart of Accounts, item groups, territories: one card, brand-coloured
+   folders, and a hover that follows the row rather than just the label. */
+/* v16 renders a tree into the page's own card element */
+.layout-main-section.frappe-card:has(.tree),
+.tree-wrapper {
+	border: 1px solid var(--afx-control-border);
+	border-radius: var(--afx-radius-lg);
+	background: var(--afx-bg, #fff);
+	padding: 14px 16px;
+}
+
+.tree .tree-link {
+	border-radius: var(--afx-radius-sm);
+	padding: 3px 6px;
+}
+
+.tree .tree-link:hover,
+.tree .tree-link.active {
+	background: var(--afx-hover, #f5f7fa);
+}
+
+.tree .tree-link.active .tree-label {
+	color: var(--afx-primary);
+	font-weight: 600;
+}
+
+.tree .tree-link > .icon,
+.tree .tree-node .icon-folder {
+	color: var(--afx-primary);
+}
+
+.tree .balance-area,
+.tree .tree-node .text-muted {
+	color: var(--afx-muted, #8d96a8);
+}
+
+/* ------------------------------------------------ calendar and gantt -- */
+
+.fc .fc-toolbar-title,
+.fc-toolbar h2 {
+	font-size: 17px;
+	font-weight: 600;
+	color: var(--afx-label-strong, #10141c);
+}
+
+.fc .fc-button,
+.fc-button-group .fc-button {
+	border-radius: var(--afx-radius-sm) !important;
+	border-color: var(--afx-control-border) !important;
+	background: var(--afx-bg, #fff) !important;
+	color: var(--afx-label, #48505f) !important;
+	font-weight: 500;
+	text-transform: none;
+}
+
+.fc .fc-button.fc-button-active,
+.fc .fc-button:hover {
+	background: var(--afx-primary-050, #eef1fd) !important;
+	color: var(--afx-primary) !important;
+	border-color: var(--afx-primary-200, #c3ccf7) !important;
+}
+
+.fc .fc-col-header-cell {
+	background: var(--afx-hover, #f5f7fa);
+	font-weight: 600;
+	color: var(--afx-label, #48505f);
+	text-transform: uppercase;
+	font-size: 11px;
+	letter-spacing: 0.04em;
+}
+
+.fc .fc-daygrid-day.fc-day-today {
+	background: var(--afx-primary-050, #eef1fd) !important;
+}
+
+.fc .fc-daygrid-day-number {
+	color: var(--afx-label, #48505f);
+	font-size: 12px;
+}
+
+.fc .fc-event,
+.fc .fc-daygrid-event {
+	border-radius: 6px;
+	border: none;
+	background: var(--afx-primary);
+	color: #fff;
+	font-size: 11px;
+	padding: 1px 6px;
+}
+
+.gantt .bar {
+	fill: var(--afx-primary);
+}
+
+.gantt .bar-progress {
+	fill: var(--afx-primary-600, #121ca4);
+}
+
+/* --------------------------------------------------------------- dark -- */
+
+[data-theme="dark"] .widget.number-widget-box,
+[data-theme="dark"] .widget.shortcut-widget-box,
+[data-theme="dark"] .widget.links-widget-box,
+[data-theme="dark"] .widget.quick-list-widget-box,
+[data-theme="dark"] .widget.dashboard-widget-box,
+[data-theme="dark"] .widget.chart-widget-box,
+[data-theme="dark"] .layout-main-section.frappe-card:has(.tree),
+[data-theme="dark"] .report-wrapper .report-summary {
+	background: var(--afx-bg, #16181d);
+}
+
+[data-theme="dark"] .report-wrapper .datatable .dt-row-totalRow .dt-cell,
+[data-theme="dark"] .fc .fc-col-header-cell {
+	background: #1a1d23 !important;
+}
+
+[data-theme="dark"] .fc .fc-button,
+[data-theme="dark"] .fc-button-group .fc-button {
+	background: var(--afx-bg, #16181d) !important;
+	color: var(--afx-label, #b9c1cf) !important;
+}
+
+[data-theme="dark"] .fc .fc-daygrid-day.fc-day-today {
+	background: rgba(30, 57, 214, 0.16) !important;
+}

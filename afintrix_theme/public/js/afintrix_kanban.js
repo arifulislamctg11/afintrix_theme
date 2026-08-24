@@ -31,18 +31,26 @@
 
 	function watch() {
 		const board = document.querySelector(".kanban");
-		if (!board || board.__afx_counted) return;
+		if (!board || board.__afx_counted) return true;
 		board.__afx_counted = true;
 		new MutationObserver(schedule).observe(board, { childList: true, subtree: true });
 		schedule();
+		return true;
+	}
+
+	// A cold load renders the board well after page-change fires, so keep
+	// looking for a few seconds instead of checking once.
+	function watch_until_found(attempts) {
+		if (watch() === true && document.querySelector(".kanban")) return;
+		if (attempts <= 0) return;
+		setTimeout(() => watch_until_found(attempts - 1), 250);
 	}
 
 	$(document).on("app_ready page-change", function () {
-		// the board is rendered after the route change resolves
-		setTimeout(watch, 300);
+		watch_until_found(40);
 	});
 
 	$(document).ready(function () {
-		setTimeout(watch, 300);
+		watch_until_found(40);
 	});
 })();

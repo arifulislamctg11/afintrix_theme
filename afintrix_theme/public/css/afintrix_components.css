@@ -200,10 +200,21 @@ body .layout-main:has(.form-sidebar) .layout-side-section {
    clear-filter button inherits the kit's button padding, which makes the pair
    wider than the slot they sit in, so the group wrapped onto a second line and
    overlapped the breadcrumbs. */
+.page-head .custom-actions,
 .page-head .custom-actions .filter-section,
-.filter-selector .btn-group {
+.page-head .page-actions,
+.filter-selector .btn-group,
+.sort-selector .btn-group {
 	flex-wrap: nowrap;
 	align-items: center;
+}
+
+/* the sort control is a button plus an icon button, same trap as the filter */
+.sort-selector .btn-order {
+	width: 32px;
+	min-width: 32px;
+	padding: 0;
+	justify-content: center;
 }
 
 .filter-selector .filter-x-button {
